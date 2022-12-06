@@ -15,7 +15,7 @@ std::string GetWindowEventName(Uint8 wineventID) {
 	case SDL_WINDOWEVENT_MAXIMIZED:       return "window maximized";
 	case SDL_WINDOWEVENT_RESTORED:        return "window restored";
 	case SDL_WINDOWEVENT_ENTER:           return "window was entered";
-	case SDL_WINDOWEVENT_LEAVE:           return "window was left";
+	case SDL_WINDOWEVENT_LEAVE:           return "mouse left window";
 	case SDL_WINDOWEVENT_FOCUS_LOST:      return "window focus lost";
 	case SDL_WINDOWEVENT_CLOSE:           return "window closed";
 	case SDL_WINDOWEVENT_TAKE_FOCUS:      return "window took focus";
