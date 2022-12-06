@@ -48,10 +48,15 @@ public:
 		}
 	}
 	void callEventByTID(Uint32 tid,  SDL_Event t) {
+		bool found = false; // at least one callback was called 
 		for (auto& i : this->events) {
 			if (i.EventTid == tid) {
+				found = true; 
 				i(t);
 			}
+		}
+		if (!found) {
+			printf("unhandled type %d\n", t.type); 
 		}
 	}
 };
