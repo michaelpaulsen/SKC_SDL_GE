@@ -36,6 +36,7 @@ int main(int argc, char* args[])
 							printf("unhandeled type %d", e.type);	
 						}
 					}
+				}
 			}
 		}
 		SDL_DestroyWindow(window);
