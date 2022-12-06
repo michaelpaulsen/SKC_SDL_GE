@@ -9,26 +9,7 @@ int main(int argc, char* args[])
 {
 	SDL_Window* window = NULL;
 	SDL_Surface* screenSurface = NULL;
-	eQue.registerEvent("SDL_MOUSEMOTION", SDL_MOUSEMOTION, [](SDL_Event e) {
-		printf("moved the mouse to (%d,%d) [%d,%d]\n", e.motion.x, e.motion.y, e.motion.xrel,e.motion.yrel); 
-		}
-	);
-	eQue.registerEvent("SDL_WINDOWEVENT", SDL_WINDOWEVENT, [](SDL_Event e) {
-		
-			printf("window event %s\n", GetWindowEventName(e.window.event).c_str());
-		}
-	);
-	eQue.registerEvent("SDL_KEYDOWN", SDL_KEYDOWN, [](SDL_Event e) {
-			if (!e.key.repeat) {
-				printf("key %d (%c) pressed\n",e.key.keysym.scancode,e.key.keysym.sym);
-			}
-		}
-	);eQue.registerEvent("SDL_KEYDOWN", SDL_KEYUP, [](SDL_Event e) {
-			if (!e.key.repeat) {
-				printf("key %d (%c) pressed\n",e.key.keysym.scancode,e.key.keysym.sym);
-			}
-		}
-	);
+	registerDefaultEvents(eQue);
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
