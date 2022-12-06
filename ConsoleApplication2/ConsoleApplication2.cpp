@@ -1,12 +1,17 @@
 #include <SDL.h>
 #include <stdio.h>
+#include "./EventHandler.h"
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
-
+EventQue eQue; 
 int main(int argc, char* args[])
 {
 	SDL_Window* window = NULL;
 	SDL_Surface* screenSurface = NULL;
+	eQue.registerEvent("SDL_MOUSEMOTION", SDL_MOUSEMOTION, [](SDL_Event e) {
+		// it is not technically safe to assume that this is a SDL_MOUSEMOTION event but the way that its called will dictate that it is.
+		}
+	);
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -27,14 +32,11 @@ int main(int argc, char* args[])
 			bool quit = false;
 			while (!quit) {
 				while (SDL_PollEvent(&e)) {
-					switch (e.type) {
-						case SDL_QUIT: {
-							puts("thanks for playing");
-							quit = true;  
-						}
-						default: {
-							printf("unhandeled type %d", e.type);	
-						}
+					if(e.type != SDL_QUIT){
+						eQue.callEventByTID(e.type, e);
+					}
+					else {
+						quit = true; 
 					}
 				}
 			}
