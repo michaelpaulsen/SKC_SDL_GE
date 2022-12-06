@@ -25,3 +25,7 @@ std::string GetWindowEventName(Uint8 wineventID) {
 
 	}
 }
+double fdist(double x, double y) {
+	return x * x + y * y; 
+}
+}
