@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include "./EventHandler.h"
+#include "./funtions.h"
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 EventQue eQue; 
@@ -9,7 +10,23 @@ int main(int argc, char* args[])
 	SDL_Window* window = NULL;
 	SDL_Surface* screenSurface = NULL;
 	eQue.registerEvent("SDL_MOUSEMOTION", SDL_MOUSEMOTION, [](SDL_Event e) {
-		// it is not technically safe to assume that this is a SDL_MOUSEMOTION event but the way that its called will dictate that it is.
+		printf("moved the mouse to (%d,%d) [%d,%d]\n", e.motion.x, e.motion.y, e.motion.xrel,e.motion.yrel); 
+		}
+	);
+	eQue.registerEvent("SDL_WINDOWEVENT", SDL_WINDOWEVENT, [](SDL_Event e) {
+		
+			printf("window event %s\n", GetWindowEventName(e.window.event).c_str());
+		}
+	);
+	eQue.registerEvent("SDL_KEYDOWN", SDL_KEYDOWN, [](SDL_Event e) {
+			if (!e.key.repeat) {
+				printf("key %d (%c) pressed\n",e.key.keysym.scancode,e.key.keysym.sym);
+			}
+		}
+	);eQue.registerEvent("SDL_KEYDOWN", SDL_KEYUP, [](SDL_Event e) {
+			if (!e.key.repeat) {
+				printf("key %d (%c) pressed\n",e.key.keysym.scancode,e.key.keysym.sym);
+			}
 		}
 	);
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
