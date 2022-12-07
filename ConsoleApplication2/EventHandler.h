@@ -39,7 +39,7 @@ public:
 		events.emplace_back(hndl);
 		//this constructs an handel in place this is the form of this function that should be used the most 
 	}
-	[[deprecated]] 
+	[[deprecated("use callEventByTID as this can lead to undifined behavior")]]
 	void callEventByName(std::string name, SDL_Event t) {
 		for (auto& i : this->events) {
 			if (i.name == name) {
