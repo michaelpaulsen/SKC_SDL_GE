@@ -31,42 +31,42 @@ double fdist(double x, double y) {
 }
 void registerDefaultEvents(EventQue &eq){
 	static std::string inputTest; 
-	eq.registerEvent("SDL_MOUSEMOTION", SDL_MOUSEMOTION, [](SDL_Event e) {
+	eq.registerEvent("SDL_MOUSEMOTION", SDL_MOUSEMOTION, [](SDL_Event e, long double fElapsedTime) {
 			if(fdist(e.motion.xrel,e.motion.yrel) >= 8){
 				printf("moved the mouse to (%d,%d) [%d,%d]\n", e.motion.x, e.motion.y, e.motion.xrel,e.motion.yrel);
 			}
 		}
 	);
-	eq.registerEvent("SDL_WINDOWEVENT", SDL_WINDOWEVENT, [](SDL_Event e) {
+	eq.registerEvent("SDL_WINDOWEVENT", SDL_WINDOWEVENT, [](SDL_Event e, long double fElapsedTime) {
 
 			printf("%s\n", GetWindowEventName(e.window.event).c_str());
 		}
 	);
-	eq.registerEvent("SDL_KEYDOWN", SDL_KEYDOWN, [](SDL_Event e) {
+	eq.registerEvent("SDL_KEYDOWN", SDL_KEYDOWN, [](SDL_Event e, long double fElapsedTime) {
 			if (!e.key.repeat) {
 				printf("key %d (%c) pressed\n",e.key.keysym.scancode,e.key.keysym.sym);
 			}
 		}
 	);
-	eq.registerEvent("SDL_KEYUP", SDL_KEYUP, [](SDL_Event e) {
+	eq.registerEvent("SDL_KEYUP", SDL_KEYUP, [](SDL_Event e, long double fElapsedTime){
 			if (!e.key.repeat) {
 				printf("key %d (%c) released\n",e.key.keysym.scancode,e.key.keysym.sym);
 			}
 		}
 	);
-	eq.registerEvent("SDL_MOUSEBUTTONDOWN", SDL_MOUSEBUTTONDOWN, [](SDL_Event e) {
+	eq.registerEvent("SDL_MOUSEBUTTONDOWN", SDL_MOUSEBUTTONDOWN, [](SDL_Event e, long double fElapsedTime) {
 			printf("mouse button %d pressed\n", e.button.button);
 		}
 	); 
-	eq.registerEvent("SDL_MOUSEBUTTONUP", SDL_MOUSEBUTTONUP, [](SDL_Event e) {
+	eq.registerEvent("SDL_MOUSEBUTTONUP", SDL_MOUSEBUTTONUP, [](SDL_Event e, long double fElapsedTime) {
 			printf("mouse button %d released\n", e.button.button);
 		}
 	);
-	eq.registerEvent("SDL_TEXTEDITING", SDL_TEXTEDITING, [](SDL_Event e) {
+	eq.registerEvent("SDL_TEXTEDITING", SDL_TEXTEDITING, [](SDL_Event e, long double fElapsedTime) {
 			printf("entered a text editing event %s", e.edit.text); 
 		}
 	);
-	eq.registerEvent("SDL_TEXTINPUT", SDL_TEXTINPUT, [](SDL_Event e) {
+	eq.registerEvent("SDL_TEXTINPUT", SDL_TEXTINPUT, [](SDL_Event e, long double fElapsedTime) {
 			
 			inputTest += e.text.text;
 

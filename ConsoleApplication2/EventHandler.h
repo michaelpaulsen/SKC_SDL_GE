@@ -5,7 +5,7 @@
 #include <SDL.h>
 struct EventHandler
 {
-	typedef std::function<void(SDL_Event)> CallBack_T;
+	typedef std::function<void(SDL_Event, long double)> CallBack_T;
 	Uint32 EventTid;
 	CallBack_T callback;
 	std::string name;
