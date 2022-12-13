@@ -30,6 +30,9 @@ struct vec2d{
 		//returns the signed distance between this vector's enpoint and the other vecors enpoint
 		return { (x - o.x), (y - o.y) }; 
 	}
+	static vec2d PosFromSDL_Rect(SDL_Rect rect) {
+		return { (double)rect.x, (double)rect.y };
+	}
 	double Fleng() {
 		return x * x + y * y; 
 		//get the f(ast) leng(th) of this vector

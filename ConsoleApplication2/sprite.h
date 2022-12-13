@@ -34,6 +34,6 @@ public:
 		return this->lastScaleRect; 
 	}
 	vec2d GetPosition(){
-		return { (double)lastScaleRect.x,(double)lastScaleRect.y };
+		return vec2d::PosFromSDL_Rect(this->lastScaleRect);
 	}
 };
