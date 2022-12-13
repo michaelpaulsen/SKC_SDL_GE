@@ -1,12 +1,18 @@
 #include <SDL.h>
 #include <stdio.h>
+#include <chrono>
+#include <thread>
 #include "./EventHandler.h"
 #include "./funtions.h"
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 EventQue eQue; 
+uint64_t frame = 0, frame1 = 0, sleepTime = 0;
+auto frameTime = std::chrono::milliseconds((int)(1000.0 / 60.0));
+long double fElapsedTime = 0.0; 
 int main(int argc, char* args[])
 {
+
 	SDL_Window* window = NULL;
 	SDL_Surface* screenSurface = NULL;
 	registerDefaultEvents(eQue);
@@ -28,6 +34,7 @@ int main(int argc, char* args[])
 			SDL_UpdateWindowSurface(window);
 			SDL_Event e;
 			bool quit = false;
+			std::chrono::time_point<std::chrono::system_clock> tp1 = std::chrono::system_clock::now();
 			while (!quit) {
 				while (SDL_PollEvent(&e)) {
 					if(e.type != SDL_QUIT){
@@ -36,7 +43,18 @@ int main(int argc, char* args[])
 					else {
 						quit = true; 
 					}
+					
 				}
+				std::chrono::time_point<std::chrono::system_clock> tp2 = std::chrono::system_clock::now();
+				std::chrono::duration<float> difference = tp2 - tp1;
+				tp1 = tp2;
+				
+				std::this_thread::sleep_for(frameTime - difference);
+				fElapsedTime = difference.count(); 
+				if (frame % 60 == 0 && frame) {
+					printf("frame render time %f ms target frame time %d\n", difference.count() * 1000, frameTime.count());
+				}
+				frame++;
 			}
 		}
 		SDL_DestroyWindow(window);
