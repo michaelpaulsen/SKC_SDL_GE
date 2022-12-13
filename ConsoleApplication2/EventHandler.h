@@ -19,8 +19,8 @@ struct EventHandler
 		name = "default";
 		EventTid = 0; 
 	}
-	void operator()(SDL_Event t) {
-		this->callback(t);
+	void operator()(SDL_Event t, long double felapsedTime) {
+		this->callback(t, felapsedTime);
 	}
 };
 
@@ -40,19 +40,19 @@ public:
 		//this constructs an handel in place this is the form of this function that should be used the most 
 	}
 	[[deprecated("use callEventByTID as this can lead to undifined behavior")]]
-	void callEventByName(std::string name, SDL_Event t) {
+	void callEventByName(std::string name, SDL_Event t, long double felapsedTime) {
 		for (auto& i : this->events) {
 			if (i.name == name) {
-				i(t);
+				i(t, felapsedTime);
 			}
 		}
 	}
-	void callEventByTID(Uint32 tid,  SDL_Event t) {
+	void callEventByTID(Uint32 tid,  SDL_Event t, long double felapsedTime) {
 		bool found = false; // at least one callback was called 
 		for (auto& i : this->events) {
 			if (i.EventTid == tid) {
 				found = true; 
-				i(t);
+				i(t, felapsedTime);
 			}
 		}
 		if (!found) {

@@ -38,7 +38,7 @@ int main(int argc, char* args[])
 			while (!quit) {
 				while (SDL_PollEvent(&e)) {
 					if(e.type != SDL_QUIT){
-						eQue.callEventByTID(e.type, e);
+						eQue.callEventByTID(e.type, e, fElapsedTime);
 					}
 					else {
 						quit = true; 
