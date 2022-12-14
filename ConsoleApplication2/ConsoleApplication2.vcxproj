@@ -71,9 +71,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Skele\source\sdl\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\vclib\sdl\include;C:\vclib\sdl_img\include;C:\vclib\SDL_ttf\include;$(IncludePath)</IncludePath>
     <ReferencePath>$(VC_ReferencesPath_x64)</ReferencePath>
-    <LibraryPath>C:\Users\Skele\source\sdl\lib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\vclib\sdl\lib\x64;C:\vclib\sdl_img\lib\x64;C:\vclib\SDL_ttf\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\vclib\sdl\include;C:\vclib\sdl_img\include;C:\vclib\SDL_ttf\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\vclib\sdl\lib\x64;C:\vclib\sdl_img\lib\x64;C:\vclib\SDL_ttf\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -113,7 +117,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,10 +134,17 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="funtions.h" />
+    <ClInclude Include="sprite.h" />
+    <ClInclude Include="Vec2d.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
