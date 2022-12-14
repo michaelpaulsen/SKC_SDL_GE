@@ -3,37 +3,40 @@
 #include<stdio.h>
 #include "./Vec2d.h" 
 class Sprite {
-	SDL_Surface *surface = nullptr;
-	SDL_Rect lastScaleRect; 
+	SDL_Texture* m_texture = NULL;
+	SDL_Rect m_lastPos, m_lastUV; 
 public:
-	Sprite(const char* path, SDL_Surface* windowSurface) {
+	Sprite(const char* path, SDL_Surface* windowSurface, SDL_Renderer* renderer) {
+		SDL_Surface* surface = nullptr;
+
 		SDL_Surface* loadedSurface = SDL_LoadBMP(path);
-		lastScaleRect = { 0,0,0,0 }; 
+		m_lastPos = { 0,0,0,0 }; 
+		m_lastUV = { 0,0,0,0 }; 
 		if (loadedSurface == NULL)
 		{
 			printf("Unable to load image %s! SDL Error: %s\n", path, SDL_GetError());
 		}
 		else
 		{
-			surface = SDL_ConvertSurface(loadedSurface, windowSurface->format, 0);
-			if (surface == NULL)
+			m_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+			if (m_texture == NULL)
 			{
-				printf("Unable to optimize image %s! SDL Error: %s\n", path, SDL_GetError());
+				printf("Unable to create texture from %s! SDL Error: %s\n", path, SDL_GetError());
 			}
+			//Get rid of old loaded surface
 			SDL_FreeSurface(loadedSurface);
 		}
 	}
-	void DrawSprite(SDL_Rect pos, SDL_Surface* windowSurface) {
-		SDL_BlitScaled(surface, NULL, windowSurface, &pos);
-		lastScaleRect = pos; 
+	void DrawSprite(SDL_Surface* windowSurface, SDL_Renderer* renderer, SDL_Rect* srcpos,  SDL_Rect* destpos) {
+		SDL_RenderCopy(renderer, this->m_texture, srcpos, destpos);
+		if (srcpos) {
+			m_lastUV = *srcpos;
+		}
+		if (destpos) {
+			m_lastPos = *destpos;
+		}
 	}
-	SDL_Surface *getSurface() {
-		return this->surface; 
-	}
-	SDL_Rect getLastScaleRect() {
-		return this->lastScaleRect; 
-	}
-	vec2d GetPosition(){
-		return vec2d::PosFromSDL_Rect(this->lastScaleRect);
+	SDL_Texture *getTexture() {
+		return this->m_texture; 
 	}
 };
