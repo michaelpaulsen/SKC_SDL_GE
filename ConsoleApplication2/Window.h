@@ -33,6 +33,9 @@ namespace Skele_lib {
 				lastColor.b = b;
 				lastAlpha   = a;
 			}
+			SDL_Rect WindowSizeToSdlRect() {
+				return { 0,0, (int)WindowSize.x,(int)WindowSize.y };
+			}
 		};
 	}
 }
