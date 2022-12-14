@@ -16,6 +16,9 @@ namespace Skele_lib {
 				y = e; 
 				z = q;
 			}
+			Vec3d() {
+				r = g = b = 0; 
+			}
 		};
 	}
 }
