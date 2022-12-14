@@ -16,7 +16,7 @@ int main(int argc, char* args[])
 	SDL_Window* window = NULL;
 	SDL_Surface* screenSurface = NULL;
 	auto gRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	registerDefaultEvents(eQue);
+	Skele_lib::SKGE::Functions::registerDefaultEvents(eQue);
 	auto sdlinitstate = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 	if (sdlinitstate  < 0)
 	{
