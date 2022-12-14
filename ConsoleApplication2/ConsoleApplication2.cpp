@@ -17,9 +17,11 @@ int main(int argc, char* args[])
 	SDL_Surface* screenSurface = NULL;
 	auto gRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	registerDefaultEvents(eQue);
-	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) < 0)
+	auto sdlinitstate = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+	if (sdlinitstate  < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+		return sdlinitstate; 
 	}
 	else
 	{
@@ -53,7 +55,7 @@ int main(int argc, char* args[])
 				std::this_thread::sleep_for(frameTime - difference);
 				fElapsedTime = difference.count(); 
 				if (frame % 60 == 0 && frame) {
-					printf("frame render time %f ms target frame time %d\n", difference.count() * 1000, frameTime.count());
+					printf("frame render time %f ms target frame time %llu\n", difference.count() * 1000, frameTime.count());
 				}
 				frame++;
 			}
