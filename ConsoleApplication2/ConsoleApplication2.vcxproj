@@ -144,7 +144,7 @@
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="funtions.h" />
     <ClInclude Include="sprite.h" />
-    <ClInclude Include="TimerStuff.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Vec2d.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

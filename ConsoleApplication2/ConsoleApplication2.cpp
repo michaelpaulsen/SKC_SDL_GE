@@ -4,12 +4,14 @@
 #include <thread>
 #include "./EventHandler.h"
 #include "./funtions.h"
+#include "./Timer.h"
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
-EventQue eQue; 
-uint64_t frame = 0, frame1 = 0, sleepTime = 0;
+Skele_lib::SKGE::EventQue eQue; 
+uint64_t g_frameCount = 0, frame1 = 0, sleepTime = 0;
 auto frameTime = std::chrono::milliseconds((int)(1000.0 / 60.0));
-long double fElapsedTime = 0.0; 
+Skele_lib::SKGE::Timer::ElapsedTime_T fElapsedTime = 0.0; 
+Skele_lib::SKGE::Timer::chrono_sysclock_t tp1, tp2; 
 int main(int argc, char* args[])
 {
 
@@ -37,27 +39,24 @@ int main(int argc, char* args[])
 			SDL_UpdateWindowSurface(window);
 			SDL_Event e;
 			bool quit = false;
-			std::chrono::time_point<std::chrono::system_clock> tp1 = std::chrono::system_clock::now();
+			tp1 = std::chrono::system_clock::now();
 			while (!quit) {
 				while (SDL_PollEvent(&e)) {
 					if(e.type != SDL_QUIT){
 						eQue.callEventByTID(e.type, e, fElapsedTime);
+						continue;
 					}
-					else {
-						quit = true; 
-					}
+					quit = true; 
 					
 				}
-				std::chrono::time_point<std::chrono::system_clock> tp2 = std::chrono::system_clock::now();
-				std::chrono::duration<float> difference = tp2 - tp1;
-				tp1 = tp2;
-				
-				std::this_thread::sleep_for(frameTime - difference);
-				fElapsedTime = difference.count(); 
-				if (frame % 60 == 0 && frame) {
-					printf("frame render time %f ms target frame time %llu\n", difference.count() * 1000, frameTime.count());
+				tp2 = std::chrono::system_clock::now();
+				Skele_lib::SKGE::Timer::Wait(tp1, tp2, frameTime, fElapsedTime);
+				if (g_frameCount % 16 == 0) {
+					printf("time for frame %llu %f\n", g_frameCount, (float)((tp2-tp1).count())/1000.0); 
 				}
-				frame++;
+				tp1 = tp2;
+				g_frameCount++;
+				//incriment the global frame count
 			}
 		}
 		SDL_DestroyWindow(window);
