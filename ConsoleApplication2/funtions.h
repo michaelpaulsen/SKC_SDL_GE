@@ -5,6 +5,7 @@
 namespace Skele_lib {
 	namespace SKGE {
 		namespace Functions {
+			auto EMPTY_EVENT = [](SDL_Event e, long double fElapsedTime) {};
 			std::string GetWindowEventName(Uint8 wineventID) {
 				switch (wineventID) {
 				case SDL_WINDOWEVENT_FOCUS_GAINED:    return "window focus gained";
@@ -31,7 +32,7 @@ namespace Skele_lib {
 			}	
 			void registerDefaultEvents(EventQue& eq) {
 				static std::string inputTest;
-				eq.registerEvent("SDL_MOUSEMOTION", SDL_MOUSEMOTION, [](SDL_Event e, long double fElapsedTime) {});
+				eq.registerEvent("SDL_MOUSEMOTION", SDL_MOUSEMOTION, EMPTY_EVENT);
 				eq.registerEvent("SDL_AUDIODEVICEADDED", SDL_AUDIODEVICEADDED, [](SDL_Event e, long double fElapsedTime) {
 						printf("registered audio driver %d ", e.adevice.which);
 						if(e.adevice.iscapture){ 
