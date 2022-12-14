@@ -30,14 +30,7 @@ namespace Skele_lib {
 
 				}
 			}
-			void Wait(chrono_sysclock_t tp1, chrono_sysclock_t tp2, ) {
-				std::chrono::duration<float> difference = tp2 - tp1;
-				tp1 = tp2;
-				std::this_thread::sleep_for(frameTime - difference);
-				fElapsedTime = (long double)frameTime.count() / 1000;
-				//this is safe because we know that a g_frameCount always takes frameTime ms
-
-			}
+		
 			void registerDefaultEvents(EventQue& eq) {
 				static std::string inputTest;
 				eq.registerEvent("SDL_MOUSEMOTION", SDL_MOUSEMOTION, [](SDL_Event e, long double fElapsedTime) {});
