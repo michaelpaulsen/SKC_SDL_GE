@@ -36,6 +36,10 @@ namespace Skele_lib {
 			SDL_Rect WindowSizeToSdlRect() {
 				return { 0,0, (int)WindowSize.x,(int)WindowSize.y };
 			}
+			void ClearScreenToDrawColor() {
+				auto r = WindowSizeToSdlRect(); 
+				SDL_RenderFillRect(renderer, &r);
+			}
 		};
 	}
 }
