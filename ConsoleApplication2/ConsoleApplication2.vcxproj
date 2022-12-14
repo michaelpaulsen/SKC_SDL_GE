@@ -141,11 +141,14 @@
     <ClCompile Include="ConsoleApplication2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="vec3d.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="funtions.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="sprite.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Vec2d.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
