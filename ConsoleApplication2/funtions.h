@@ -28,11 +28,20 @@ namespace Skele_lib {
 				default:                              return "Unknown / invalid window event id";
 
 				}
-			}
-		
+			}	
 			void registerDefaultEvents(EventQue& eq) {
 				static std::string inputTest;
 				eq.registerEvent("SDL_MOUSEMOTION", SDL_MOUSEMOTION, [](SDL_Event e, long double fElapsedTime) {});
+				eq.registerEvent("SDL_AUDIODEVICEADDED", SDL_AUDIODEVICEADDED, [](SDL_Event e, long double fElapsedTime) {
+						printf("registered audio driver %d ", e.adevice.which);
+						if(e.adevice.iscapture){ 
+							printf("as an input\n"); 
+						}
+						else {
+							printf("as an output\n");
+						}
+						
+					});
 				eq.registerEvent("SDL_WINDOWEVENT", SDL_WINDOWEVENT, [](SDL_Event e, long double fElapsedTime) {
 
 					printf("%s\n", GetWindowEventName(e.window.event).c_str());
