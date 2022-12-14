@@ -5,7 +5,6 @@
 namespace Skele_lib {
 	namespace SKGE {
 		namespace Functions {
-			typedef std::chrono::time_point<std::chrono::system_clock> chrono_sysclock_t;
 			std::string GetWindowEventName(Uint8 wineventID) {
 				switch (wineventID) {
 				case SDL_WINDOWEVENT_FOCUS_GAINED:    return "window focus gained";
