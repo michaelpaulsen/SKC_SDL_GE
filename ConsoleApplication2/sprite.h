@@ -6,38 +6,51 @@ namespace Skele_lib {
 	namespace SKGE {
 		class Sprite {
 			SDL_Texture* m_texture = NULL;
-			vec2d m_size;
-			SDL_Rect* UVMap; 
+			vec2d m_size, m_baseSize;
+			SDL_Rect* p_UVMap;
 		public:
 			Sprite() {
-				m_size = { 0,0 };
-				UVMap = NULL; 
+				m_size = m_baseSize = { 0,0 };
+				p_UVMap = NULL;
 			}
 			Sprite(const char* path, SDL_Renderer* renderer, vec2d size = {0,0}) {
 				SDL_Surface* loadedSurface = SDL_LoadBMP(path);
-				UVMap = NULL; 
+				
+				p_UVMap = NULL;
 				if (loadedSurface != NULL)
 				{
 					m_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
 					SDL_FreeSurface(loadedSurface);
 				}
-				m_size = size;
+				m_size = m_baseSize = size;
 			}
-			void DrawSprite( SDL_Renderer* renderer, SDL_Rect* destpos) {
-				SDL_RenderCopy(renderer, this->m_texture, UVMap, destpos);
+		
+			void DrawSprite( SDL_Renderer* renderer, vec2d pos) {
+				if (!(m_size.x && m_size.y)) {
+					SDL_RenderCopy(renderer, this->m_texture, p_UVMap, NULL);
+					return; 
+				}
+				SDL_Rect destrect = { pos.x, pos.y, m_size.x,m_size.y }; 
+				SDL_RenderCopy(renderer, this->m_texture, p_UVMap, &destrect);
 			}
 			void SetUVMap(SDL_Rect uvm) {
-				if (!UVMap) {
-					UVMap = (SDL_Rect*)malloc(sizeof(SDL_Rect)); 
+				if (!p_UVMap) {
+					p_UVMap = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+					if (!p_UVMap)return;
 				}
-				UVMap->x = uvm.x; 
-				UVMap->y = uvm.y; 
-				UVMap->w = uvm.w; 
-				UVMap->h = uvm.h; 
+				p_UVMap->x = uvm.x;
+				p_UVMap->y = uvm.y; 
+				p_UVMap->w = uvm.w; 
+				p_UVMap->h = uvm.h; 
 			}
 			void ClearUVMap() {
-				free(UVMap);
-				UVMap = NULL;
+				free(p_UVMap);
+			}
+			void SetScale(double scale) {
+				m_size *= scale; 
+			}
+			void ClearScale() {
+				m_size = m_baseSize; //this is why we have m_baseSize 
 			}
 		};
 	}
