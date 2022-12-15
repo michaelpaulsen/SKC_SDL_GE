@@ -45,30 +45,68 @@ namespace Skele_lib {
 				// exept when you need to sqrt the result anyway 
 				// [this is marked depercated because there isn't a time that this should be used over fleng()]
 			}
-			void operator*(vec2d o) {
-				x *= o.x; 
-				y *= o.y; 
+			vec2d operator*(vec2d o)  {
+				vec2d temp; 
+				temp.x = x * o.x;
+				temp.y = y * o.y;
+				return temp; 
 			}
-			void operator*(double i) {
-				x *= i;
-				y *= i;
+			
+			vec2d operator/(vec2d o)  {
+				vec2d temp;
+				temp.x = x / o.x;
+				temp.y = y / o.y;
+				return temp;
 			}
-			void operator/(vec2d o) {
-				x /= o.x; 
-				y /= o.y; 
+			
+			vec2d operator+(vec2d o)  {
+				vec2d temp;
+				temp.x = x + o.x;
+				temp.y = y + o.y;
+				return temp;
 			}
-			void operator/(double i) {
-				x /= i;
-				y /= i;
+			vec2d operator-(vec2d o) {
+				vec2d temp;
+				temp.x = x - o.x;
+				temp.y = y - o.y;
+				return temp;
+			}
+			vec2d operator/(double i) {
+				vec2d temp;
+				temp.x = x / i;
+				temp.y = y / i;
+				return temp;
+			}
+			vec2d operator*(double i) {
+				vec2d temp;
+				temp.x = x * i;
+				temp.y = y * i;
+				return temp;
 			}
 
-			void operator+(vec2d o) {
-				x += o.x; 
-				y += o.y; 
+			void operator*=(vec2d o) {
+				x = x * o.x;
+				y = y * o.y;
 			}
-			void operator-(vec2d o) {
-				x -= o.x; 
-				y -= o.y; 
+			void operator*=(double i) {
+				x = x * i;
+				y = y * i;
+			}
+			void operator/=(vec2d o) {
+				x = x / o.x;
+				y = y / o.y;
+			}
+			void operator/=(double i) {
+				x = x / i;
+				y = y / i;
+			}
+			void operator-=(vec2d o) {
+				x = x - o.x;
+				y = y - o.y;
+			}
+			void operator+=(vec2d o) {
+				x = x + o.x;
+				y = y + o.y;
 			}
 			
 		};
