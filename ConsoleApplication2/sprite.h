@@ -13,7 +13,7 @@ namespace Skele_lib {
 				m_size = m_baseSize = { 0,0 };
 				p_UVMap = NULL;
 			}
-			Sprite(const char* path, SDL_Renderer* renderer, vec2d size = {0,0}) {
+			Sprite(const char* path, SDL_Renderer* renderer, vec2d size) {
 				SDL_Surface* loadedSurface = SDL_LoadBMP(path);
 				
 				p_UVMap = NULL;
@@ -26,10 +26,6 @@ namespace Skele_lib {
 			}
 		
 			void DrawSprite( SDL_Renderer* renderer, vec2d pos) {
-				if (!(m_size.x && m_size.y)) {
-					SDL_RenderCopy(renderer, this->m_texture, p_UVMap, NULL);
-					return; 
-				}
 				SDL_Rect destrect = { pos.x, pos.y, m_size.x,m_size.y }; 
 				SDL_RenderCopy(renderer, this->m_texture, p_UVMap, &destrect);
 			}
