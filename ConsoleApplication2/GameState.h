@@ -5,7 +5,7 @@ namespace Skele_lib {
 	namespace SKGE {
 		struct World {
 			Timer::frameCount_t frame; 
-			Timer::ElapsedTime_T fElapsedTime;
+			Timer::ElapsedTime_t fElapsedTime;
 			int TFPS; 
 			
 			World(int tfs) {
