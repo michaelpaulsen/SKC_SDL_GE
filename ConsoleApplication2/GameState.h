@@ -5,12 +5,14 @@
 #include "./Player.h"
 namespace Skele_lib {
 	namespace SKGE {
-		struct World{
-			unsigned long long frame;
-			long double fElapsedTime;
-			int TFPS; 
+		class World{
+			typedef unsigned long long FrameN_t; 
+			FrameN_t frame;
+			FrameN_t TFPS;
 			std::vector<Player> playerQue; 
 			size_t players;
+		public: 
+			long double fElapsedTime;
 			World(int tfs) {
 				TFPS = tfs; 
 				frame = 0;
@@ -26,6 +28,15 @@ namespace Skele_lib {
 			}
 			Player& GetPlayerAt(size_t index) {
 				return playerQue.at(index);
+			}
+			FrameN_t GetFrame() {
+				return frame; 
+			}
+			void IncFrame() {
+				++frame;
+			}
+			void SetTargetFPS(FrameN_t targetFPS) {
+				TFPS = targetFPS;
 			}
 		};
 	}
