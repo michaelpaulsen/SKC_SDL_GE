@@ -32,6 +32,9 @@ namespace Skele_lib {
 				m_size = m_baseSize; //this is why we have m_baseSize 
 				m_sprite.ClearScale();
 			}
+			void DrawSprite(SDL_Renderer* renderer) {
+				m_sprite.DrawSprite(renderer, m_position);
+			}
 		};
 	}
 }
