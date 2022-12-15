@@ -15,6 +15,7 @@ namespace Skele_lib {
 				renderer = SDL_CreateRenderer(window, -1, rendererFlags);
 				WindowSize.x = w; 
 				WindowSize.y = h;
+				lastAlpha = 0; 
 			}
 			~Window() {
 				SDL_DestroyRenderer(renderer);
