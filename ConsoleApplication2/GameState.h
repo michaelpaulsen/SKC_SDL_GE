@@ -4,8 +4,8 @@
 namespace Skele_lib {
 	namespace SKGE {
 		struct World {
-			Timer::frameCount_t frame; 
-			Timer::ElapsedTime_t fElapsedTime;
+			long double frame;
+			long double fElapsedTime;
 			int TFPS; 
 			
 			World(int tfs) {
@@ -13,8 +13,8 @@ namespace Skele_lib {
 				frame = 0;
 				fElapsedTime = 0; 
 			}
-			Timer::chrono_ms_t GetFrameTime() {
-				return Timer::chrono_ms_t(1000 / TFPS);
+			std::chrono::milliseconds GetFrameTime() {
+				return std::chrono::milliseconds(1000 / TFPS);
 			}
 		};
 	}

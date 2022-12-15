@@ -5,7 +5,7 @@
 namespace Skele_lib {
 	namespace SKGE {
 		namespace Functions {
-			auto EMPTY_EVENT = [](SDL_Event e, long double fElapsedTime) {};
+			auto EMPTY_EVENT = [](SDL_Event e, World world) {};
 			std::string GetWindowEventName(Uint8 wineventID) {
 				switch (wineventID) {
 				case SDL_WINDOWEVENT_FOCUS_GAINED:    return "window focus gained";
@@ -33,7 +33,7 @@ namespace Skele_lib {
 			void registerDefaultEvents(EventQue& eq) {
 				static std::string inputTest;
 				eq.registerEvent("SDL_MOUSEMOTION", SDL_MOUSEMOTION, EMPTY_EVENT);
-				eq.registerEvent("SDL_AUDIODEVICEADDED", SDL_AUDIODEVICEADDED, [](SDL_Event e, long double fElapsedTime) {
+				eq.registerEvent("SDL_AUDIODEVICEADDED", SDL_AUDIODEVICEADDED, [](SDL_Event e, World world) {
 						printf("registered audio driver %d ", e.adevice.which);
 						if(e.adevice.iscapture){ 
 							printf("as an input\n"); 
@@ -43,46 +43,33 @@ namespace Skele_lib {
 						}
 						
 					});
-				eq.registerEvent("SDL_WINDOWEVENT", SDL_WINDOWEVENT, [](SDL_Event e, long double fElapsedTime) {
+				eq.registerEvent("SDL_WINDOWEVENT", SDL_WINDOWEVENT, [](SDL_Event e, World world) {
 
 					printf("%s\n", GetWindowEventName(e.window.event).c_str());
 					}
 				);
-				eq.registerEvent("SDL_KEYDOWN", SDL_KEYDOWN, [](SDL_Event e, long double fElapsedTime) {
+				eq.registerEvent("SDL_KEYDOWN", SDL_KEYDOWN, [](SDL_Event e, World world) {
 					if (!e.key.repeat) {
 						printf("key %d (%c) pressed\n", e.key.keysym.scancode, e.key.keysym.sym);
 					}
 					}
 				);
-				eq.registerEvent("SDL_KEYUP", SDL_KEYUP, [](SDL_Event e, long double fElapsedTime) {
+				eq.registerEvent("SDL_KEYUP", SDL_KEYUP, [](SDL_Event e, World world) {
 					if (!e.key.repeat) {
 						printf("key %d (%c) released\n", e.key.keysym.scancode, e.key.keysym.sym);
 					}
 					}
 				);
-				eq.registerEvent("SDL_MOUSEBUTTONDOWN", SDL_MOUSEBUTTONDOWN, [](SDL_Event e, long double fElapsedTime) {
+				eq.registerEvent("SDL_MOUSEBUTTONDOWN", SDL_MOUSEBUTTONDOWN, [](SDL_Event e, World world) {
 					printf("mouse button %d pressed\n", e.button.button);
 					}
 				);
-				eq.registerEvent("SDL_MOUSEBUTTONUP", SDL_MOUSEBUTTONUP, [](SDL_Event e, long double fElapsedTime) {
+				eq.registerEvent("SDL_MOUSEBUTTONUP", SDL_MOUSEBUTTONUP, [](SDL_Event e, World world) {
 					printf("mouse button %d released\n", e.button.button);
 					}
 				);
-				eq.registerEvent("SDL_TEXTEDITING", SDL_TEXTEDITING, [](SDL_Event e, long double fElapsedTime) {
-					printf("entered a text editing event %s", e.edit.text);
-					}
-				);
-				eq.registerEvent("SDL_TEXTINPUT", SDL_TEXTINPUT, [](SDL_Event e, long double fElapsedTime) {
-
-					inputTest += e.text.text;
-
-				printf("entered a text intput event %s (%s - %llu) \n", e.text.text, inputTest.c_str(), 4 - inputTest.size());
-				if (inputTest.size() >= 4) {
-					printf("  too many chars in buffer (%llu >= 4 ) clearing\n", inputTest.size());
-					inputTest = "";
-				}
-					}
-				);
+				eq.registerEvent("SDL_TEXTEDITING", SDL_TEXTEDITING, EMPTY_EVENT);
+				eq.registerEvent("SDL_TEXTINPUT", SDL_TEXTINPUT, EMPTY_EVENT);
 			}
 		}
 	}

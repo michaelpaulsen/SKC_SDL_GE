@@ -3,11 +3,12 @@
 #include <vector>
 #include <functional>
 #include <SDL.h>
+#include "./GameState.h"
 namespace Skele_lib {
 	namespace SKGE {
 		struct EventHandler
 		{
-			typedef std::function<void(SDL_Event, long double)> CallBack_T;
+			typedef std::function<void(SDL_Event, World)> CallBack_T;
 			Uint32 EventTid;
 			CallBack_T callback;
 			std::string name;
@@ -49,12 +50,12 @@ namespace Skele_lib {
 					}
 				}
 			}
-			void callEventByTID(Uint32 tid, SDL_Event t, long double felapsedTime) {
+			void callEventByTID(Uint32 tid, SDL_Event t, World world) {
 				bool found = false; // at least one callback was called 
 				for (auto& i : this->events) {
 					if (i.EventTid == tid) {
 						found = true;
-						i(t, felapsedTime);
+						i.callback(t, world);
 					}
 				}
 				if (!found) {
