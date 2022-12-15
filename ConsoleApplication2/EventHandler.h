@@ -8,7 +8,7 @@ namespace Skele_lib {
 	namespace SKGE {
 		struct EventHandler
 		{
-			typedef std::function<void(SDL_Event, World)> CallBack_T;
+			typedef std::function<void(SDL_Event, World&)> CallBack_T;
 			Uint32 EventTid;
 			CallBack_T callback;
 			std::string name;
@@ -22,8 +22,8 @@ namespace Skele_lib {
 				name = "default";
 				EventTid = 0;
 			}
-			void operator()(SDL_Event t, long double felapsedTime) {
-				this->callback(t, felapsedTime);
+			void operator()(SDL_Event t, World w) {
+				this->callback(t, w);
 			}
 		};
 
@@ -43,10 +43,10 @@ namespace Skele_lib {
 				//this constructs an handel in place this is the form of this function that should be used the most 
 			}
 			[[deprecated("use callEventByTID as this can lead to undifined behavior")]]
-			void callEventByName(std::string name, SDL_Event t, long double felapsedTime) {
+			void callEventByName(std::string name, SDL_Event t, World w) {
 				for (auto& i : this->events) {
 					if (i.name == name) {
-						i(t, felapsedTime);
+						i(t, w);
 					}
 				}
 			}
