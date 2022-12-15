@@ -45,6 +45,32 @@ namespace Skele_lib {
 				// exept when you need to sqrt the result anyway 
 				// [this is marked depercated because there isn't a time that this should be used over fleng()]
 			}
+			void operator*(vec2d o) {
+				x *= o.x; 
+				y *= o.y; 
+			}
+			void operator*(double i) {
+				x *= i;
+				y *= i;
+			}
+			void operator/(vec2d o) {
+				x /= o.x; 
+				y /= o.y; 
+			}
+			void operator/(double i) {
+				x /= i;
+				y /= i;
+			}
+
+			void operator+(vec2d o) {
+				x += o.x; 
+				y += o.y; 
+			}
+			void operator-(vec2d o) {
+				x -= o.x; 
+				y -= o.y; 
+			}
+			
 		};
 	}
 }
