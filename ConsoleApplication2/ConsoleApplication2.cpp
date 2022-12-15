@@ -40,8 +40,7 @@ int main(int argc, char* args[]){
 			}
 			quit = true; 
 		}
-		window.SetDrawColor(255, 255, 255, 255);
-
+		window.SetDrawColor(255, 255, 255);
 		window.ClearScreenToDrawColor();
 		window.UpdateScreen();
 		tp2 = std::chrono::system_clock::now();
