@@ -7,6 +7,7 @@
 #include "./Timer.h"
 #include "./GameState.h"
 #include "./Window.h"
+#include "./sprite.h"
 
 auto gameState = Skele_lib::SKGE::GameState(60);
 Skele_lib::SKGE::Timer::chrono_sysclock_t tp1, tp2; 
@@ -26,6 +27,8 @@ int main(int argc, char* args[]){
 		printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 		return -255; 
 	}
+	auto sprite1 = Skele_lib::SKGE::Sprite("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer);
+
 	SDL_Event e;
 	bool quit = false;
 	tp1 = std::chrono::system_clock::now();
