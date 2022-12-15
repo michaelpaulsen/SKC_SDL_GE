@@ -59,7 +59,7 @@ namespace Skele_lib {
 					}
 				}
 				if (!found) {
-					printf("unhandled type %d\n", t.type);
+					printf("unhandled type %d (0x%x)\n", t.type, t.type);
 				}
 			}
 		};
