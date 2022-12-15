@@ -3,7 +3,7 @@
 #include <vector>
 #include <functional>
 #include <SDL.h>
-#include "./GameState.h"
+#include "./world.h"
 namespace Skele_lib {
 	namespace SKGE {
 		struct EventHandler
