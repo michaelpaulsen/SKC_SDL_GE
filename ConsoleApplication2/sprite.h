@@ -12,17 +12,9 @@ namespace Skele_lib {
 			Sprite(const char* path, SDL_Renderer* renderer) {
 				m_size = { 0,0 }; 
 				SDL_Surface* loadedSurface = SDL_LoadBMP(path);
-				if (loadedSurface == NULL)
-				{
-					printf("Unable to load image %s! SDL Error: %s\n", path, SDL_GetError());
-				}
-				else
+				if (loadedSurface != NULL)
 				{
 					m_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
-					if (m_texture == NULL)
-					{
-						printf("Unable to create texture from %s! SDL Error: %s\n", path, SDL_GetError());
-					}
 					SDL_FreeSurface(loadedSurface);
 				}
 				m_lastPos = { 0,0,0,0 };
