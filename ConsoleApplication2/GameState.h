@@ -4,7 +4,7 @@
 namespace Skele_lib {
 	namespace SKGE {
 		struct World {
-			long double frame;
+			unsigned long long frame;
 			long double fElapsedTime;
 			int TFPS; 
 			
