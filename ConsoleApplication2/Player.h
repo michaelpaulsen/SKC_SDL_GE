@@ -33,10 +33,15 @@ namespace Skele_lib {
 			void ClearUVMap() {
 				m_sprite.ClearUVMap();
 			}
-			void SetScale(double scale) {
+			void SetXYScale(double scale) {
+				m_size_x = m_baseSize_x; //this is why we have m_baseSize 
+				m_size_y = m_baseSize_y; //this is why we have m_baseSize 
+				//this is a hack we should implement a real scaling system like the one in Sprite
+				// however that might be slow when comparing for non-static collision checking. 
+				// so I think that this would be the best way of doing this. 
 				m_size_x *= scale;
 				m_size_y *= scale;
-				m_sprite.SetScale(scale); 
+				m_sprite.SetXYScale(scale); 
 
 			}
 			void GetScale(double& scaleX, double& scaleY) {
