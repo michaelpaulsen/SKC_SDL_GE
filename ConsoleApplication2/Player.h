@@ -16,7 +16,6 @@ namespace Skele_lib {
 				m_score = 0; 
 			}
 			Player(const char* path, SDL_Renderer* renderer, double _sx, double _sy, double _px, double _py) {
-				
 				m_sprite = Sprite(path, renderer,_sx,_sy);
 				m_position_x = _px; 
 				m_position_y = _py; 
@@ -55,6 +54,12 @@ namespace Skele_lib {
 			}
 			void DrawSprite(SDL_Renderer* renderer) {
 				m_sprite.DrawSprite(renderer, m_position_x, m_position_y);
+			}
+			void SetXScale(double scale) {
+				m_sprite.SetXScale(scale); 
+			}
+			void SetYScale(double scale) {
+				m_sprite.SetYScale(scale); 
 			}
 		};
 	}

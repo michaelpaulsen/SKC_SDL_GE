@@ -53,6 +53,12 @@ namespace Skele_lib {
 				xScale = m_size_x;
 				yScale = m_size_y;
 			}
+			void SetXScale(double scale) {
+				m_scale_x = scale; 
+			}
+			void SetYScale(double scale) {
+				m_scale_y = scale; 
+			}
 			void ClearScale() {
 				m_scale_x = 1;  
 				m_scale_y = 1;  
