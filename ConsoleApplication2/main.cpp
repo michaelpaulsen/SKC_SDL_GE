@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <chrono>
 #include <thread>
-#include "./EventHandler.h"
-#include "./funtions.h"
-#include "./Timer.h"
-#include "./world.h"
-#include "./Window.h"
-#include "./Player.h"
+#include "./headers/EventHandler.h"
+#include "./headers/funtions.h"
+#include "./headers/Timer.h"
+#include "./headers/world.h"
+#include "./headers/Window.h"
+#include "./headers/Player.h"
 
 auto world = Skele_lib::SKGE::World(60);
 Skele_lib::SKGE::Timer::chrono_sysclock_t tp1, tp2; 
