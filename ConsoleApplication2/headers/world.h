@@ -29,9 +29,9 @@ namespace Skele_lib {
 			std::chrono::milliseconds GetFrameTime() {
 				return std::chrono::milliseconds(1000 / TFPS);
 			}
-			void AddPlayer(const char* path, SDL_Renderer* renderer, double _sx, double _sy, double _px, double _py) {
+			void AddPlayer(const char* path, SDL_Renderer* renderer, double _sx, double _sy, double _px, double _py, double _dx =1, double _dy =1) {
 				if (m_players != MAX_PLAYERS) {
-					l_players[m_players] = Player(path, renderer, _sx, _sy, _px, _py);
+					l_players[m_players] = Player(path, renderer, _sx, _sy, _px, _py, _dx, _dy);
 					m_players++;
 
 				}
@@ -44,9 +44,23 @@ namespace Skele_lib {
 
 			}
 			void DrawPlayers(SDL_Renderer* r) {
-				for (size_t i = 0; i < m_players; i++)
-				{
+				for (size_t i = 0; i < m_players; i++){
 					l_players[i].DrawSprite(r);
+				}
+			}
+			void ApplyForceToPlayers(int w, int h) {
+				for (size_t i = 0; i < m_players; i++){
+					double p_forceVecX, p_forceVecY; 
+					auto& player = l_players[i];
+					player.GetForce(p_forceVecX, p_forceVecY);
+					player.ApplyForceAndSetPos();
+					auto rect = player.getPlayerRect();
+					if ((rect.x <= 0 && p_forceVecX < 0) || (rect.x >= w && p_forceVecX > 0))  {
+						player.BounceHorizontal(); 
+					}
+					if ((rect.y <= 0 && p_forceVecY < 0) || (rect.y >= h && p_forceVecY > 0)) {
+						player.BounceVirtical();
+					}
 				}
 			}
 			FrameN_t GetFrame() {
