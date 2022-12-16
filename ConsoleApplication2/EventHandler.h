@@ -42,14 +42,6 @@ namespace Skele_lib {
 				events.emplace_back(hndl);
 				//this constructs an handel in place this is the form of this function that should be used the most 
 			}
-			[[deprecated("use callEventByTID as this can lead to undifined behavior")]]
-			void callEventByName(std::string name, SDL_Event t, World w) {
-				for (auto& i : this->events) {
-					if (i.name == name) {
-						i(t, w);
-					}
-				}
-			}
 			void callEventByTID(Uint32 tid, SDL_Event t, World world) {
 				bool found = false; // at least one callback was called 
 				for (auto& i : this->events) {
