@@ -6,22 +6,25 @@
 #include "./Player.h"
 #include "./Window.h"
 #include "./sprite.h"
+#ifndef MAX_PLAYERS
+#define MAX_PLAYERS 4 
+#endif // !MAX_PLAYERS
 namespace Skele_lib {
 	namespace SKGE {
 		class World {
 			typedef unsigned long long FrameN_t;
 			FrameN_t frame;
 			FrameN_t TFPS;
-			size_t players;
+			size_t m_players;
+			Player l_players[MAX_PLAYERS];
 		public:
-			std::vector<Player> playerQue;
 
 			long double fElapsedTime;
 			World(int tfs) {
 				TFPS = tfs;
 				frame = 0;
 				fElapsedTime = 0;
-				players = 0;
+				m_players = 0;
 			}
 			std::chrono::milliseconds GetFrameTime() {
 				return std::chrono::milliseconds(1000 / TFPS);
