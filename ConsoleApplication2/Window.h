@@ -7,14 +7,14 @@ namespace Skele_lib {
 		struct Window {
 			SDL_Window* window = NULL;
 			SDL_Renderer* renderer = NULL;
-			vec2d WindowSize; 
+			Vec2d WindowSize; 
 			Vec3d lastColor; 
 			char lastAlpha; 
 			Window(const char* title, int x, int y, int w, int h, Uint32 windowFlags, Uint32 rendererFlags) {
 				window = SDL_CreateWindow(title, x, y, w, h, windowFlags);
 				renderer = SDL_CreateRenderer(window, -1, rendererFlags);
-				WindowSize.x = w; 
-				WindowSize.y = h;
+				WindowSize.m_x = w; 
+				WindowSize.m_y = h;
 				lastAlpha = 0; 
 			}
 			~Window() {
@@ -35,7 +35,7 @@ namespace Skele_lib {
 				lastAlpha   = a;
 			}
 			SDL_Rect WindowSizeToSdlRect() {
-				return { 0,0, (int)WindowSize.x,(int)WindowSize.y };
+				return { 0,0, (int)WindowSize.m_x,(int)WindowSize.m_y };
 			}
 			void ClearScreenToDrawColor() {
 				auto r = WindowSizeToSdlRect(); 

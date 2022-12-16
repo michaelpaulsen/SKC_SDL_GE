@@ -6,14 +6,14 @@ namespace Skele_lib {
 	namespace SKGE {
 		class Sprite {
 			SDL_Texture* m_texture = NULL;
-			vec2d m_size, m_baseSize;
+			Vec2d m_size, m_baseSize;
 			SDL_Rect* p_UVMap;
 		public:
 			Sprite() {
 				m_size = m_baseSize = { 0,0 };
 				p_UVMap = NULL;
 			}
-			Sprite(const char* path, SDL_Renderer* renderer, vec2d size) {
+			Sprite(const char* path, SDL_Renderer* renderer, Vec2d size) {
 				SDL_Surface* loadedSurface = SDL_LoadBMP(path);
 				
 				p_UVMap = NULL;
@@ -25,8 +25,9 @@ namespace Skele_lib {
 				m_size = m_baseSize = size;
 			}
 		
-			void DrawSprite( SDL_Renderer* renderer, vec2d pos) {
-				SDL_Rect destrect = { pos.x, pos.y, m_size.x,m_size.y }; 
+			void DrawSprite( SDL_Renderer* renderer, Vec2d pos) {
+				SDL_Rect destrect = { pos.m_x, pos.m_y, m_size.m_x,m_size.m_y }; 
+				printf("size [w,h] (%f, %f)\n", m_size.m_x, m_size.m_y);
 				SDL_RenderCopy(renderer, this->m_texture, p_UVMap, &destrect);
 			}
 			void SetUVMap(SDL_Rect uvm) {

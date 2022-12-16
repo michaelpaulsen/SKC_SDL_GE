@@ -4,109 +4,110 @@
 namespace Skele_lib {
 	namespace SKGE {
 
-		struct vec2d {
-			double x, y;
-
+		struct Vec2d {
+			double m_x, m_y;
+			
+			Vec2d(double x, double y) {
+				m_x = x; 
+				m_y = y; 
+			}
+			Vec2d() {
+				m_x = 0; 
+				m_y = 0; 
+			}
 			SDL_Rect ToSDL_Rect() {
-				//makes a sdl rect object at the origin and the width and height set to x and y respectivly; 
-				return { 0,0,(int)round(x),(int)round(y) }; //for some reason the c math lib has no way of casting to int with round (iround)
+				//makes a sdl rect object at the origin and the width and height set to m_x and m_y respectivly; 
+				return { 0,0,(int)round(m_x),(int)round(m_y) }; //for some reason the c math lib has no way of casting to int with round (iround)
 
 			}
 			SDL_Rect AsOriginOfSDL_Rect(int width, int height) {
 				//takes in a width and a height and makes a rect at the point of the vector \
 				with the width and height passed in 
-				return { (int)round(x),(int)round(y), width, height };
+				return { (int)round(m_x),(int)round(m_y), width, height };
 			}
-			SDL_Rect AsOriginOfSDL_Rect(vec2d o) {
+			SDL_Rect AsOriginOfSDL_Rect(Vec2d o) {
 				//takes in another vec2d and returns a rect with the origin set to this vector's endpoint \
 				and the width set to the x value of the passed in vector \
 				and the height the y value of the passed in vector
-				return { (int)round(x),(int)round(y),(int)round(o.x),(int)round(o.y) };
+				return { (int)round(m_x),(int)round(m_y),(int)round(o.m_x),(int)round(o.m_y) };
 			}
-			vec2d AbsDist(vec2d o) {
+			Vec2d AbsDist(Vec2d o) {
 				//  returns the absolute distance between this vector's enpoint and the other vecors enpoint   
-				return { fabs(x - o.x), fabs(y - o.y) };
+				return { fabs(m_x - o.m_x), fabs(m_y - o.m_y) };
 			}
-			vec2d Dist(vec2d o) {
+			Vec2d Dist(Vec2d o) {
 				//returns the signed distance between this vector's enpoint and the other vecors enpoint
-				return { (x - o.x), (y - o.y) };
+				return { (m_x - o.m_x), (m_y - o.m_y) };
 			}
-			static vec2d PosFromSDL_Rect(SDL_Rect rect) {
+			static Vec2d PosFromSDL_Rect(SDL_Rect rect) {
 				return { (double)rect.x, (double)rect.y };
 			}
 			double Fleng() {
-				return x * x + y * y;
+				return m_x * m_x + m_y * m_y;
 				//get the f(ast) leng(th) of this vector
 			}
-			[[deprecated("use of the fast length api (fleng()) is recomended over this because it dosn't do the expensive sqrt this is here for completness")]]
-			double leng() {
-				return sqrt(x * x + y * y);
-				//returns the slow length this should not be used 
-				// exept when you need to sqrt the result anyway 
-				// [this is marked depercated because there isn't a time that this should be used over fleng()]
-			}
-			vec2d operator*(vec2d o)  {
-				vec2d temp; 
-				temp.x = x * o.x;
-				temp.y = y * o.y;
+			Vec2d operator*(Vec2d o)  {
+				Vec2d temp; 
+				temp.m_x = m_x * o.m_x;
+				temp.m_y = m_y * o.m_y;
 				return temp; 
 			}
 			
-			vec2d operator/(vec2d o)  {
-				vec2d temp;
-				temp.x = x / o.x;
-				temp.y = y / o.y;
+			Vec2d operator/(Vec2d o)  {
+				Vec2d temp;
+				temp.m_x = m_x / o.m_x;
+				temp.m_y = m_y / o.m_y;
 				return temp;
 			}
 			
-			vec2d operator+(vec2d o)  {
-				vec2d temp;
-				temp.x = x + o.x;
-				temp.y = y + o.y;
+			Vec2d operator+(Vec2d o)  {
+				Vec2d temp;
+				temp.m_x = m_x + o.m_x;
+				temp.m_y = m_y + o.m_y;
 				return temp;
 			}
-			vec2d operator-(vec2d o) {
-				vec2d temp;
-				temp.x = x - o.x;
-				temp.y = y - o.y;
+			Vec2d operator-(Vec2d o) {
+				Vec2d temp;
+				temp.m_x = m_x - o.m_x;
+				temp.m_y = m_y - o.m_y;
 				return temp;
 			}
-			vec2d operator/(double i) {
-				vec2d temp;
-				temp.x = x / i;
-				temp.y = y / i;
+			Vec2d operator/(double i) {
+				Vec2d temp;
+				temp.m_x = m_x / i;
+				temp.m_y = m_y / i;
 				return temp;
 			}
-			vec2d operator*(double i) {
-				vec2d temp;
-				temp.x = x * i;
-				temp.y = y * i;
+			Vec2d operator*(double i) {
+				Vec2d temp;
+				temp.m_x = m_x * i;
+				temp.m_y = m_y * i;
 				return temp;
 			}
 
-			void operator*=(vec2d o) {
-				x = x * o.x;
-				y = y * o.y;
+			void operator*=(Vec2d o) {
+				m_x = m_x * o.m_x;
+				m_y = m_y * o.m_y;
 			}
 			void operator*=(double i) {
-				x = x * i;
-				y = y * i;
+				m_x = m_x * i;
+				m_y = m_y * i;
 			}
-			void operator/=(vec2d o) {
-				x = x / o.x;
-				y = y / o.y;
+			void operator/=(Vec2d o) {
+				m_x = m_x / o.m_x;
+				m_y = m_y / o.m_y;
 			}
 			void operator/=(double i) {
-				x = x / i;
-				y = y / i;
+				m_x = m_x / i;
+				m_y = m_y / i;
 			}
-			void operator-=(vec2d o) {
-				x = x - o.x;
-				y = y - o.y;
+			void operator-=(Vec2d o) {
+				m_x = m_x - o.m_x;
+				m_y = m_y - o.m_y;
 			}
-			void operator+=(vec2d o) {
-				x = x + o.x;
-				y = y + o.y;
+			void operator+=(Vec2d o) {
+				m_x = m_x + o.m_x;
+				m_y = m_y + o.m_y;
 			}
 			
 		};
