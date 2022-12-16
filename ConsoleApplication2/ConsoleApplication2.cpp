@@ -31,7 +31,7 @@ int main(int argc, char* args[]){
 		static int xpos = 0; 
 		static double scale = 1;
 		static size_t targetPlayer = 0; 
-		auto& player = world.GetPlayerAt(0);
+		auto& player = world.GetPlayerAt(targetPlayer);
 		auto playerRect = player.getPlayerRect();
 		
 			switch (sym) {
@@ -44,6 +44,7 @@ int main(int argc, char* args[]){
 				case 'f': {
 					targetPlayer++; 
 					targetPlayer %= 2;
+					printf("changing to player %llu ", targetPlayer);
 					break;
 				}
 				case '-': {
