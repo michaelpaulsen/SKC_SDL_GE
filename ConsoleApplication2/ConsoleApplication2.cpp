@@ -35,57 +35,15 @@ int main(int argc, char* args[]){
 		auto playerRect = player.getPlayerRect();
 		
 			switch (sym) {
-				case '=': {
-					scale += 0.1; 
-					player.SetXYScale(scale);
-					printf("scale %f%%\n", scale * 100);
-					break;
-				}
-				case 'f': {
-					targetPlayer++; 
-					targetPlayer %= 2;
-					printf("changing to player %llu ", targetPlayer);
-					break;
-				}
-				case '-': {
-					scale -= 0.1;
-					player.SetXYScale(scale);
-					printf("scale %f%%\n", scale * 100);
-					break;
-				}
-				case ' ': {
-					player.ClearScale();
-					scale = 1.0; 
-					return;
-				}
-				case 'w': {
-					if (playerRect.y > 0) {
-						player.MoveNorth(1.0); 
-					}
-					return;
-				}
-				case 'a': {
-					if (playerRect.x > 0) {
-						player.MoveWest(1.0);
-					}
-					return;
-				}
-				case 's': {
-					if (playerRect.y < 1080) {
-						player.MoveSouth(1.0);
-					}
-					return;
-				}
-				case 'd': {
-					if (playerRect.x < 1920) {
-						player.moveEast(1.0); 
-					}
-					return;
-				}
-				default: {
-					printf("un handled key %d (\"%c\")\n", sym, sym);
-					return;
-				}
+				case '=': {scale += 0.1; player.SetXYScale(scale); printf("scale %f%%\n", scale * 100); break;}
+				case 'f': {targetPlayer++; targetPlayer %= 2; printf("changing to player %llu ", targetPlayer); break; }
+				case '-': {scale -= 0.1; player.SetXYScale(scale); printf("scale %f%%\n", scale * 100); break;}
+				case ' ': {player.ClearScale(); scale = 1.0; return;}
+				case 'w': {if (playerRect.y > 0) {player.MoveNorth(1.0);} return;}
+				case 'a': {if (playerRect.x > 0) {player.MoveWest(1.0);} return;}
+				case 's': {if (playerRect.y < 1080) {player.MoveSouth(1.0);} return;}
+				case 'd': {if (playerRect.x < 1920) {player.moveEast(1.0);} return;}
+				default: {printf("un handled key %d (\"%c\")\n", sym, sym); return;}
 			}
 		});
 	eQue.registerEvent("SDL_MOUSEMOTION",        SDL_MOUSEMOTION,        [](SDL_Event e, Skele_lib::SKGE::World &world) {});
