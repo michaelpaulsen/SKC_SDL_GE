@@ -46,7 +46,6 @@ namespace Skele_lib {
 			void DrawPlayers(SDL_Renderer* r) {
 				for (size_t i = 0; i < m_players; i++)
 				{
-					auto rect = l_players[i].getPlayerRect(); 
 					l_players[i].DrawSprite(r);
 				}
 			}
