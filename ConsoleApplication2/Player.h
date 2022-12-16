@@ -5,22 +5,27 @@ namespace Skele_lib {
 	namespace SKGE {
 		class Player{
 			Sprite m_sprite;
-			Vector::Vec2d m_position, m_baseSize;
-			Vector::Vec2d m_size;
+			double m_size_x, m_position_x, m_baseSize_x;
+			double m_size_y, m_position_y, m_baseSize_y;
 			int	m_score ;
 		public:
-			Player(const char* path, SDL_Renderer* renderer, Vector::Vec2d _s, Vector::Vec2d _p) {
-				Vector::Vec2d vect = { _s.m_x,_s.m_y };
-				m_sprite = Sprite(path, renderer, vect);
-				m_position = { 0,0 }; 
-				m_size =  m_baseSize = _s;
-			//	m_size = (Vector::Vec2d*)malloc(sizeof(Vector::Vec2d));
-			//	m_size->m_x = _s.m_x; 
-			//	m_size->m_y = _s.m_y; 
+			Player() {
+				m_sprite = Sprite();
+				m_size_x = m_position_x = m_baseSize_x = 0;
+				m_size_y = m_position_y = m_baseSize_y = 0;
+				m_score = 0; 
+			}
+			Player(const char* path, SDL_Renderer* renderer, double _sx, double _sy, double _px, double _py) {
+				
+				m_sprite = Sprite(path, renderer,_sx,_sy);
+				m_position_x = _px; 
+				m_position_y = _py; 
+				m_size_x =  m_baseSize_x = _sx;
+				m_size_y =  m_baseSize_y = _sy;
 				m_score = 0; 
 			}
 			SDL_Rect getPlayerRect() {
-				return {(int)m_position.m_x,(int)m_position.m_y,(int)m_size.m_x,(int)m_size.m_y};	
+				return {(int)m_position_x,(int)m_position_y,(int)m_size_x,(int)m_size_y};	
 			}
 			void SetUVMap(SDL_Rect uvm) {
 				m_sprite.SetUVMap(uvm);
@@ -29,19 +34,22 @@ namespace Skele_lib {
 				m_sprite.ClearUVMap();
 			}
 			void SetScale(double scale) {
-				m_size *= scale;
+				m_size_x *= scale;
+				m_size_y *= scale;
 				m_sprite.SetScale(scale); 
 
 			}
-			Vector::Vec2d GetScale() {
-				return m_size; 
+			void GetScale(double& scaleX, double& scaleY) {
+				scaleX = m_size_x;
+				scaleY = m_size_y;
 			}
 			void ClearScale() {
-				m_size = m_baseSize; //this is why we have m_baseSize 
+				m_size_x = m_baseSize_x; //this is why we have m_baseSize 
+				m_size_y = m_baseSize_y; //this is why we have m_baseSize 
 				m_sprite.ClearScale();
 			}
 			void DrawSprite(SDL_Renderer* renderer) {
-				m_sprite.DrawSprite(renderer, m_position);
+				m_sprite.DrawSprite(renderer, m_position_x, m_position_y);
 			}
 		};
 	}
