@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include <string>
-namespace Skele5_lib {
+namespace Skele_lib {
 	namespace SKGE {
 		namespace Functions {
 			std::string GetWindowEventName(Uint8 wineventID) {
