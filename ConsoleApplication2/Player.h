@@ -3,7 +3,7 @@
 #include "Vec2d.h"
 namespace Skele_lib {
 	namespace SKGE {
-		struct Player{
+		class Player{
 			Sprite m_sprite;
 			Vector::Vec2d m_position, m_baseSize;
 			Vector::Vec2d m_size;
@@ -13,7 +13,10 @@ namespace Skele_lib {
 				Vector::Vec2d vect = { _s.m_x,_s.m_y };
 				m_sprite = Sprite(path, renderer, vect);
 				m_position = { 0,0 }; 
-				m_size =m_baseSize = _s;
+				m_size =  m_baseSize = _s;
+			//	m_size = (Vector::Vec2d*)malloc(sizeof(Vector::Vec2d));
+			//	m_size->m_x = _s.m_x; 
+			//	m_size->m_y = _s.m_y; 
 				m_score = 0; 
 			}
 			SDL_Rect getPlayerRect() {
