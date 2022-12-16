@@ -28,24 +28,57 @@ int main(int argc, char* args[]){
 
 	eQue.registerEvent("SDL_KEYDOWN",            SDL_KEYDOWN,            [](SDL_Event e, Skele_lib::SKGE::World &world) {
 		auto sym = e.key.keysym.sym;
-		double p_scaleX, p_scaleY;
 		static int xpos = 0; 
-		switch (sym) {
-				case 'z': {
-					auto& player = world.GetPlayerAt(0);
-					xpos += 16; 
-					xpos %= 32; 
-					world.GetPlayerAt(0).SetUVMap({ xpos,0,16,16 });
-					world.GetPlayerAt(0).SetXYScale(2);
-					world.GetPlayerAt(0).GetScale(p_scaleX, p_scaleY);
-					printf("size [w,h] (%f, %f)\n", p_scaleX, p_scaleY);
-
+		static double scale = 1;
+		static size_t targetPlayer = 0; 
+		auto& player = world.GetPlayerAt(0);
+		auto playerRect = player.getPlayerRect();
+		
+			switch (sym) {
+				case '=': {
+					scale += 0.1; 
+					player.SetXYScale(scale);
+					printf("scale %f%%\n", scale * 100);
+					break;
+				}
+				case 'f': {
+					targetPlayer++; 
+					targetPlayer %= 2;
+					break;
+				}
+				case '-': {
+					scale -= 0.1;
+					player.SetXYScale(scale);
+					printf("scale %f%%\n", scale * 100);
+					break;
+				}
+				case ' ': {
+					player.ClearScale();
+					scale = 1.0; 
 					return;
 				}
-				case 'x': {
-					world.GetPlayerAt(0).ClearScale();
-					world.GetPlayerAt(0).GetScale(p_scaleX, p_scaleY);
-					printf("size [w,h] (%f, %f)\n", p_scaleX, p_scaleY);
+				case 'w': {
+					if (playerRect.y > 0) {
+						player.MoveNorth(1.0); 
+					}
+					return;
+				}
+				case 'a': {
+					if (playerRect.x > 0) {
+						player.MoveWest(1.0);
+					}
+					return;
+				}
+				case 's': {
+					if (playerRect.y < 1080) {
+						player.MoveSouth(1.0);
+					}
+					return;
+				}
+				case 'd': {
+					if (playerRect.x < 1920) {
+						player.moveEast(1.0); 
+					}
 					return;
 				}
 				default: {
