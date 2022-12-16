@@ -31,6 +31,10 @@ namespace Skele_lib {
 			void SetScale(double scale) {
 				m_size *= scale;
 				m_sprite.SetScale(scale); 
+
+			}
+			Vector::Vec2d GetScale() {
+				return m_size; 
 			}
 			void ClearScale() {
 				m_size = m_baseSize; //this is why we have m_baseSize 
