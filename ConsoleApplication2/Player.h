@@ -5,12 +5,13 @@ namespace Skele_lib {
 	namespace SKGE {
 		struct Player{
 			Sprite m_sprite;
-			vec2d m_position; 
-			vec2d m_size, m_baseSize;
-			int	m_score;
-			Player(const char* path, SDL_Renderer* renderer, Vec2d _s, Vec2d _p) {
-				Vec2d rect = { _s.m_x,_s.m_y };
-				m_sprite = Sprite(path, renderer, rect);
+			Vector::Vec2d m_position, m_baseSize;
+			Vector::Vec2d m_size;
+			int	m_score ;
+		public:
+			Player(const char* path, SDL_Renderer* renderer, Vector::Vec2d _s, Vector::Vec2d _p) {
+				Vector::Vec2d vect = { _s.m_x,_s.m_y };
+				m_sprite = Sprite(path, renderer, vect);
 				m_position = { 0,0 }; 
 				m_size =m_baseSize = _s;
 				m_score = 0; 

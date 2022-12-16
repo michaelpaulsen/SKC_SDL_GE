@@ -7,8 +7,8 @@ namespace Skele_lib {
 		struct Window {
 			SDL_Window* window = NULL;
 			SDL_Renderer* renderer = NULL;
-			Vec2d WindowSize; 
-			Vec3d lastColor; 
+			Vector::Vec2d WindowSize;
+			Vector::Vec3d lastColor;
 			char lastAlpha; 
 			Window(const char* title, int x, int y, int w, int h, Uint32 windowFlags, Uint32 rendererFlags) {
 				window = SDL_CreateWindow(title, x, y, w, h, windowFlags);
