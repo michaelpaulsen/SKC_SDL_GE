@@ -15,12 +15,10 @@ int windw = 1920, windh = 1080;
 size_t wFlags = SDL_WINDOW_SHOWN, rFlags = SDL_RENDERER_ACCELERATED;
 int main(int argc, char* args[]){
 	auto window = Skele_lib::SKGE::Window("test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windw, windh,wFlags,rFlags);
-	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, 64, 64, 0, 0,5,5);
-	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, 64, 64, 64, 0,10,10);
+	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, { 64, 64 }, { 0, 0 }, { 0.25, 0.25 });
+	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, { 64, 64 }, { 64, 0 }, { 0.5, 0.5 });
 	world.GetPlayerAt(0).SetUVMap({ 0,0,16,16 });
 	world.GetPlayerAt(1).SetUVMap({ 16,0,16,16 });
-	world.GetPlayerAt(0).SetDragForce(0.025);
-	world.GetPlayerAt(1).SetDragForce(0.05);
 	eQue.registerEvent("SDL_KEYDOWN",            SDL_KEYDOWN,            [](SDL_Event e, Skele_lib::SKGE::World &world) {
 		auto sym = e.key.keysym.sym;
 		static int xpos = 0; 
@@ -33,10 +31,10 @@ int main(int argc, char* args[]){
 				case '-': {scale -= 0.1; player.SetXYScale(scale); printf("scale %f%%\n", scale * 100); break;}
 				case 'f': {targetPlayer++; targetPlayer %= 2; printf("changing to player %llu ", targetPlayer); break; }
 				case ' ': {player.ClearScale(); scale = 1.0; return;}
-				case 'w': {player.AddForce(0,-100); return;}
-				case 'a': {player.AddForce(-100,0); return;}
-				case 's': {player.AddForce(0, 100); return;}
-				case 'd': {player.AddForce(100, 0); return;}
+				case 'w': {player.AddForce({ 0,-100 }); return; }
+				case 'a': {player.AddForce({ -100,0 }); return; }
+				case 's': {player.AddForce({ 0, 100 }); return; }
+				case 'd': {player.AddForce({ 100, 0 }); return; }
 				default: {printf("un handled key %d (\"%c\")\n", sym, sym); return;}
 			}
 		});

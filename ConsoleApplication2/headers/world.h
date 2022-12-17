@@ -29,9 +29,9 @@ namespace Skele_lib {
 			std::chrono::milliseconds GetFrameTime() {
 				return std::chrono::milliseconds(1000 / TFPS);
 			}
-			void AddPlayer(const char* path, SDL_Renderer* renderer, double _sx, double _sy, double _px, double _py, double _dx =1, double _dy =1) {
+			void AddPlayer(const char* path, SDL_Renderer* renderer, Vector::Vec2d _s, Vector::Vec2d _p, Vector::Vec2d _d) {
 				if (m_players != MAX_PLAYERS) {
-					l_players[m_players] = Player(path, renderer, _sx, _sy, _px, _py, _dx, _dy);
+					l_players[m_players] = Player(path, renderer, _s, _p,_d);
 					m_players++;
 
 				}
