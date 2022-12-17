@@ -18,7 +18,6 @@ namespace Skele_lib {
 				SDL_Rect ToSDL_Rect() {
 					//makes a sdl rect object at the origin and the width and height set to m_x and m_y respectivly; 
 					return { 0,0,(int)round(m_x),(int)round(m_y) }; //for some reason the c math lib has no way of casting to int with round (iround)
-
 				}
 				SDL_Rect AsOriginOfSDL_Rect(int width, int height) {
 					//takes in a width and a height and makes a rect at the point of the vector \
@@ -52,14 +51,12 @@ namespace Skele_lib {
 					temp.m_y = m_y * o.m_y;
 					return temp;
 				}
-
 				Vec2d operator/(Vec2d o) {
 					Vec2d temp;
 					temp.m_x = m_x / o.m_x;
 					temp.m_y = m_y / o.m_y;
 					return temp;
 				}
-
 				Vec2d operator+(Vec2d o) {
 					Vec2d temp;
 					temp.m_x = m_x + o.m_x;
@@ -84,7 +81,6 @@ namespace Skele_lib {
 					temp.m_y = m_y * i;
 					return temp;
 				}
-
 				void operator*=(Vec2d o) {
 					m_x = m_x * o.m_x;
 					m_y = m_y * o.m_y;
@@ -110,8 +106,6 @@ namespace Skele_lib {
 					m_y = m_y + o.m_y;
 				}
 			};
-			const Vec2d ZERO2D = Vec2d(0, 0);
-
 		}
 	}
 }
