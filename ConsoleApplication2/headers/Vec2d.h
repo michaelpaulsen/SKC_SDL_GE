@@ -5,7 +5,12 @@ namespace Skele_lib {
 	namespace SKGE {
 		namespace Vector {
 			struct Vec2d {
-				double m_x, m_y;
+				union {
+					double m_x, m_w;
+				};
+				union {
+					double m_y, m_h;
+				};
 
 				Vec2d(double x, double y) {
 					m_x = x;
