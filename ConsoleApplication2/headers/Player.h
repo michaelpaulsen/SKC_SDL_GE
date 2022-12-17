@@ -98,19 +98,6 @@ namespace Skele_lib {
 			void SetYScale(double scale) {
 				m_sprite.SetYScale(scale); 
 			}
-			void MoveNorth(double speed) {
-			
-				m_position_y--;
-			}
-			void MoveSouth(double speed) {
-				m_position_y++;
-			}
-			void moveEast(double speed) {
-				m_position_x++;
-			}
-			void MoveWest(double speed) {
-				m_position_x--; 
-			}
 		};
 	}
 }
