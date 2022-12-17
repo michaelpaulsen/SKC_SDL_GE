@@ -18,7 +18,8 @@ namespace Skele_lib {
 				m_position = _p; 
 				m_size = _s;
 				m_force = { 0,0 };
-				m_drag = _d; 
+				m_drag = _d;
+				m_score = 0; 
 			}
 			SDL_Rect getPlayerRect() {
 				return {(int)m_position.m_x,(int)m_position.m_y,(int)m_size.m_w,(int)m_size.m_h};
