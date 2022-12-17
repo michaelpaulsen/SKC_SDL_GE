@@ -27,3 +27,4 @@ x64/Release/ConsoleApplication2.pdb
 *.exe
 *.sln
 x64/Debug/SKC_SDL_GE.pdb
+x64/Debug/SDL2.dll

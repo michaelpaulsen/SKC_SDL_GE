@@ -55,10 +55,10 @@ namespace Skele_lib {
 					player.GetForce(p_forceVecX, p_forceVecY);
 					player.ApplyForceAndSetPos();
 					auto rect = player.getPlayerRect();
-					if ((rect.x <= 0 && p_forceVecX < 0) || (rect.x >= w && p_forceVecX > 0))  {
+					if ((rect.x <= 0 && p_forceVecX < 0) || (rect.x >= w- rect.w && p_forceVecX > 0))  {
 						player.BounceHorizontal(); 
 					}
-					if ((rect.y <= 0 && p_forceVecY < 0) || (rect.y >= h && p_forceVecY > 0)) {
+					if ((rect.y <= 0 && p_forceVecY < 0) || (rect.y >= h- rect.h && p_forceVecY > 0)) {
 						player.BounceVirtical();
 					}
 				}

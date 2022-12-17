@@ -8,24 +8,19 @@
 #include "./headers/world.h"
 #include "./headers/Window.h"
 #include "./headers/Player.h"
-
 auto world = Skele_lib::SKGE::World(60);
 Skele_lib::SKGE::Timer::chrono_sysclock_t tp1, tp2; 
 Skele_lib::SKGE::EventQue eQue;
-
-
+int windw = 1920, windh = 1080;
+size_t wFlags = SDL_WINDOW_SHOWN, rFlags = SDL_RENDERER_ACCELERATED;
 int main(int argc, char* args[]){
-	SDL_Rect playerUV = { 0,0,16,16 };
-	SDL_Rect playerPos = { 128,128,128,128 };
-	auto window = Skele_lib::SKGE::Window("test",
-		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		1920, 1080,
-		SDL_WINDOW_SHOWN, SDL_RENDERER_ACCELERATED);
-	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, 64, 64, 0, 0);
-	world.GetPlayerAt(0).SetUVMap({ 0,0,16,16 }); 
-	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, 64, 64, 64, 0);
+	auto window = Skele_lib::SKGE::Window("test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windw, windh,wFlags,rFlags);
+	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, 64, 64, 0, 0,5,5);
+	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, 64, 64, 64, 0,10,10);
+	world.GetPlayerAt(0).SetUVMap({ 0,0,16,16 });
 	world.GetPlayerAt(1).SetUVMap({ 16,0,16,16 });
-
+	world.GetPlayerAt(0).SetDragForce(0.025);
+	world.GetPlayerAt(1).SetDragForce(0.05);
 	eQue.registerEvent("SDL_KEYDOWN",            SDL_KEYDOWN,            [](SDL_Event e, Skele_lib::SKGE::World &world) {
 		auto sym = e.key.keysym.sym;
 		static int xpos = 0; 
@@ -33,16 +28,15 @@ int main(int argc, char* args[]){
 		static size_t targetPlayer = 0; 
 		auto& player = world.GetPlayerAt(targetPlayer);
 		auto playerRect = player.getPlayerRect();
-		
-			switch (sym) {
+		switch (sym) {
 				case '=': {scale += 0.1; player.SetXYScale(scale); printf("scale %f%%\n", scale * 100); break;}
-				case 'f': {targetPlayer++; targetPlayer %= 2; printf("changing to player %llu ", targetPlayer); break; }
 				case '-': {scale -= 0.1; player.SetXYScale(scale); printf("scale %f%%\n", scale * 100); break;}
+				case 'f': {targetPlayer++; targetPlayer %= 2; printf("changing to player %llu ", targetPlayer); break; }
 				case ' ': {player.ClearScale(); scale = 1.0; return;}
-				case 'w': {if (playerRect.y > 0) {player.MoveNorth(1.0);} return;}
-				case 'a': {if (playerRect.x > 0) {player.MoveWest(1.0);} return;}
-				case 's': {if (playerRect.y < 1080) {player.MoveSouth(1.0);} return;}
-				case 'd': {if (playerRect.x < 1920) {player.moveEast(1.0);} return;}
+				case 'w': {player.AddForce(0,-100); return;}
+				case 'a': {player.AddForce(-100,0); return;}
+				case 's': {player.AddForce(0, 100); return;}
+				case 'd': {player.AddForce(100, 0); return;}
 				default: {printf("un handled key %d (\"%c\")\n", sym, sym); return;}
 			}
 		});
@@ -63,7 +57,6 @@ int main(int argc, char* args[]){
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 		return sdlinitstate; 
 	}
-	
 	if (!(window.window && window.renderer)){
 		printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 		return -255; 
@@ -71,7 +64,6 @@ int main(int argc, char* args[]){
 	SDL_Event e;
 	bool quit = false;
 	tp1 = std::chrono::system_clock::now();
-	 
 	while (!quit) {
 		while (SDL_PollEvent(&e)) {
 			if(e.type != SDL_QUIT){	
@@ -80,6 +72,7 @@ int main(int argc, char* args[]){
 			}
 			quit = true; 
 		}
+		world.ApplyForceToPlayers(windw, windh);
 		///=== DRAW START ===
 		window.SetDrawColor(255, 255, 255);		
 		window.ClearScreenToDrawColor();
