@@ -110,6 +110,16 @@ namespace Skele_lib {
 					m_x = m_x + o.m_x;
 					m_y = m_y + o.m_y;
 				}
+				void operator=(Vec2d o) {
+					m_x = o.m_x;
+					m_y = o.m_y;
+				}
+				void operator=(double o) {
+					// this is not technically a valid operation in LA but this is a short hand for
+					// this + (o,o) wich is so that is why I implement it. 
+					m_x = o;
+					m_y = o;
+				}
 			};
 		}
 	}
