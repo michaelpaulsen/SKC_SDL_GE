@@ -5,6 +5,7 @@
 #include <chrono>
 #include "./Player.h"
 #include "./Window.h"
+#include "./Physics.h"
 #include "./sprite.h"
 #ifndef MAX_PLAYERS
 #define MAX_PLAYERS 4 
@@ -50,16 +51,18 @@ namespace Skele_lib {
 			}
 			void ApplyForceToPlayers(int w, int h) {
 				for (size_t i = 0; i < m_players; i++){
-					double p_forceVecX, p_forceVecY; 
 					auto& player = l_players[i];
-					player.GetForce(p_forceVecX, p_forceVecY);
-					player.ApplyForceAndSetPos();
+					auto& force = player.GetForce();
+					auto& pos = player.GetPosition();
+					auto drag = player.GetDrag();
+					Skele_lib::SKGE::Physics::ApplyForceAndSetPos(pos, force, drag);
+					//player.ApplyForceAndSetPos();
 					auto rect = player.getPlayerRect();
-					if ((rect.x <= 0 && p_forceVecX < 0) || (rect.x >= w- rect.w && p_forceVecX > 0))  {
-						player.BounceHorizontal(); 
+					if ((rect.x <= 0 && force.m_x < 0) || (rect.x >= w - rect.w && force.m_x > 0))  {
+						Skele_lib::SKGE::Physics::BounceHorizontal(force);
 					}
-					if ((rect.y <= 0 && p_forceVecY < 0) || (rect.y >= h- rect.h && p_forceVecY > 0)) {
-						player.BounceVirtical();
+					if ((rect.y <= 0 && force.m_y < 0) || (rect.y >= h - rect.h && force.m_y > 0))  {
+						Skele_lib::SKGE::Physics::BounceHorizontal(force);
 					}
 				}
 			}

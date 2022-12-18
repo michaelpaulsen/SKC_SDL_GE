@@ -8,6 +8,7 @@
 #include "./headers/world.h"
 #include "./headers/Window.h"
 #include "./headers/Player.h"
+#include "./headers/Physics.h"
 auto world = Skele_lib::SKGE::World(60);
 Skele_lib::SKGE::Timer::chrono_sysclock_t tp1, tp2; 
 Skele_lib::SKGE::EventQue eQue;
@@ -31,10 +32,10 @@ int main(int argc, char* args[]){
 				case '-': {scale -= 0.1; player.SetXYScale(scale); printf("scale %f%%\n", scale * 100); break;}
 				case 'f': {targetPlayer++; targetPlayer %= 2; printf("changing to player %llu ", targetPlayer); break; }
 				case ' ': {player.ClearScale(); scale = 1.0; return;}
-				case 'w': {player.AddForce({ 0,-100 }); return; }
-				case 'a': {player.AddForce({ -100,0 }); return; }
-				case 's': {player.AddForce({ 0, 100 }); return; }
-				case 'd': {player.AddForce({ 100, 0 }); return; }
+				case 'w': {Skele_lib::SKGE::Physics::AddForce(player.GetForce(),{ 0,-100 }); return; }
+				case 'a': {Skele_lib::SKGE::Physics::AddForce(player.GetForce(), { -100,0 }); return; }
+				case 's': {Skele_lib::SKGE::Physics::AddForce(player.GetForce(), { 0, 100 }); return; }
+				case 'd': {Skele_lib::SKGE::Physics::AddForce(player.GetForce(), { 100, 0 }); return; }
 				default: {printf("un handled key %d (\"%c\")\n", sym, sym); return;}
 			}
 		});

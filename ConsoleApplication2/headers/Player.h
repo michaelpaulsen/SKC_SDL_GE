@@ -10,7 +10,10 @@ namespace Skele_lib {
 		public:
 			Player() {
 				m_sprite = Sprite();
-				m_size = m_position = m_force = m_drag = { 0,0 };
+				m_size = { 0,0 }; 
+				m_position = { 0,0 }; 
+				m_force = { 0,0 }; 
+				m_drag = { 0,0 };
 				m_score = 0; 
 			}
 			Player(const char* path, SDL_Renderer* renderer, Vector::Vec2d _s, Vector::Vec2d _p, Vector::Vec2d _d) {
@@ -22,13 +25,8 @@ namespace Skele_lib {
 				m_score = 0; 
 			}
 			SDL_Rect getPlayerRect() {
-				return {(int)m_position.m_x,(int)m_position.m_y,(int)m_size.m_w,(int)m_size.m_h};
-			}
-			void BounceHorizontal() {
-				m_force.m_x = -m_force.m_x; 
-			}
-			void BounceVirtical() {
-				m_force.m_y = -m_force.m_y; 
+				auto size = m_size * m_scale; 
+				return {(int)m_position.m_x,(int)m_position.m_y,(int)size.m_w,(int)size.m_h};
 			}
 			void SetUVMap(SDL_Rect uvm) {
 				m_sprite.SetUVMap(uvm);
@@ -37,44 +35,20 @@ namespace Skele_lib {
 				m_sprite.ClearUVMap();
 			}
 			void SetXYScale(double scale) {
-				m_scale = {1,1}; 
-				//this is a hack we should implement a real scaling system like the one in Sprite
-				// however that might be slow when comparing for non-static collision checking. 
-				// so I think that this would be the best way of doing this. 
-				m_size *= scale;
+				m_size = scale;
 				m_sprite.SetXYScale(scale); 
-
 			}
-			void AddForce(Vector::Vec2d force) {
-				printf("adding force (%f, %f)\n", force.m_x, force.m_y);
-				m_force += force; 
+			Vector::Vec2d GetScale() {
+				return m_scale;
 			}
-			void SetForce(Vector::Vec2d force) {
-				m_force = force;
+			Vector::Vec2d& GetPosition() {
+				return m_position;
 			}
-			void ApplyForceAndSetPos() {
-				if (m_force.m_x) {
-					m_position.m_x += m_force.m_x;
-					if (m_force.m_x > 0) m_force.m_x -= m_drag.m_x;
-					if (m_force.m_x < 0) m_force.m_x += m_drag.m_x;
-				}
-				if (m_force.m_y) {
-					m_position.m_y += m_force.m_y;
-					if (m_force.m_y > 0) m_force.m_y -= m_drag.m_y;
-					if (m_force.m_y < 0) m_force.m_y += m_drag.m_y;
-				}
+			Vector::Vec2d& GetDrag() {
+				return m_drag;
 			}
-			void SetDragForce(double drag) {
-				m_drag.m_x = drag;
-				m_drag.m_y = drag;
-			}; 
-			void GetScale(double& scaleX, double& scaleY) {
-				scaleX = m_size.m_w;
-				scaleY = m_size.m_h;
-			}
-			void GetForce(double& scaleX, double& scaleY) {
-				scaleX = m_force.m_x;
-				scaleY = m_force.m_y;
+			Vector::Vec2d& GetForce() {
+				return m_force; 
 			}
 			void ClearScale() {
 				m_scale = {1,1}; //this is why we have m_baseSize 
