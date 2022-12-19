@@ -49,14 +49,19 @@ namespace Skele_lib {
 					l_players[i].DrawSprite(r);
 				}
 			}
-			void ApplyForceToPlayers(int w, int h) {
+			void ApplyForceToPlayers() {
 				for (size_t i = 0; i < m_players; i++){
 					auto& player = l_players[i];
 					auto& force = player.GetForce();
 					auto& pos = player.GetPosition();
 					auto drag = player.GetDrag();
 					Skele_lib::SKGE::Physics::ApplyForceAndSetPos(pos, force, drag);
-					//player.ApplyForceAndSetPos();
+				}
+			}
+			void BouncePlayersOffWorldBounds(int w, int h) {
+				for (size_t i = 0; i < m_players; i++){
+					auto& player = l_players[i];
+					auto& force = player.GetForce();
 					auto rect = player.getPlayerRect();
 					if ((rect.x <= 0 && force.m_x < 0) || (rect.x >= w - rect.w && force.m_x > 0))  {
 						Skele_lib::SKGE::Physics::BounceHorizontal(force);
