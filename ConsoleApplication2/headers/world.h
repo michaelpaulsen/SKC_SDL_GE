@@ -62,7 +62,7 @@ namespace Skele_lib {
 						Skele_lib::SKGE::Physics::BounceHorizontal(force);
 					}
 					if ((rect.y <= 0 && force.m_y < 0) || (rect.y >= h - rect.h && force.m_y > 0))  {
-						Skele_lib::SKGE::Physics::BounceHorizontal(force);
+						Skele_lib::SKGE::Physics::BounceVirtical(force);
 					}
 				}
 			}
