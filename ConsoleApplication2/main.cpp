@@ -22,23 +22,31 @@ int main(int argc, char* args[]){
 	world.GetPlayerAt(1).SetUVMap({ 16,0,16,16 });
 	eQue.registerEvent("SDL_KEYDOWN",            SDL_KEYDOWN,            [](SDL_Event e, Skele_lib::SKGE::World &world) {
 		auto sym = e.key.keysym.sym;
-		static int xpos = 0; 
-		static double scale = 1;
-		static size_t targetPlayer = 0; 
-		auto& player = world.GetPlayerAt(targetPlayer);
-		auto playerRect = player.getPlayerRect();
+		auto& player = world.GetPlayerAt(0);
+		auto& spring = world.GetPlayerAt(1); 
 		switch (sym) {
-				case '=': {scale += 0.1; player.SetXYScale(scale); printf("scale %f%%\n", scale * 100); break;}
-				case '-': {scale -= 0.1; player.SetXYScale(scale); printf("scale %f%%\n", scale * 100); break;}
-				case 'f': {targetPlayer++; targetPlayer %= 2; printf("changing to player %llu ", targetPlayer); break; }
-				case ' ': {player.ClearScale(); scale = 1.0; return;}
-				case 'w': {Skele_lib::SKGE::Physics::AddForce(player.GetForce(),{ 0,-100 }); return; }
-				case 'a': {Skele_lib::SKGE::Physics::AddForce(player.GetForce(), { -100,0 }); return; }
-				case 's': {Skele_lib::SKGE::Physics::AddForce(player.GetForce(), { 0, 100 }); return; }
-				case 'd': {Skele_lib::SKGE::Physics::AddForce(player.GetForce(), { 100, 0 }); return; }
-				default: {printf("un handled key %d (\"%c\")\n", sym, sym); return;}
+				case 'w': {
+					Skele_lib::SKGE::Physics::AddForce(player.GetForce(),{ 0,-100 });
+					return;
+				}
+				case 'a': {
+					Skele_lib::SKGE::Physics::AddForce(player.GetForce(), { -100,0 });
+					return;
+				}
+				case 's': {
+					Skele_lib::SKGE::Physics::AddForce(player.GetForce(), { 0, 100 });
+					return;
+				}
+				case 'd': {
+					Skele_lib::SKGE::Physics::AddForce(player.GetForce(), { 100, 0 });
+					return;
+				}
+				default: {
+					return;
+				}
+
 			}
-		});
+			});
 	eQue.registerEvent("SDL_MOUSEMOTION",        SDL_MOUSEMOTION,        [](SDL_Event e, Skele_lib::SKGE::World &world) {});
 	eQue.registerEvent("SDL_WINDOWEVENT",        SDL_WINDOWEVENT,        [](SDL_Event e, Skele_lib::SKGE::World &world) {});
 	eQue.registerEvent("SDL_KEYDOWN",            SDL_KEYUP,              [](SDL_Event e, Skele_lib::SKGE::World &world) {});
@@ -71,10 +79,16 @@ int main(int argc, char* args[]){
 			}
 			quit = true; 
 		}
-		world.ApplyForceToPlayers(windw, windh);
+		world.ApplyForceToPlayers();
+		world.BouncePlayersOffWorldBounds(windw, windh);
 		///=== DRAW START ===
 		window.SetDrawColor(255, 255, 255);		
+	
 		window.ClearScreenToDrawColor();
+		auto &player = world.GetPlayerAt(0); 
+		auto &spring = world.GetPlayerAt(1); 
+		Skele_lib::SKGE::Physics::CaculateAndAddSpringForce(spring.GetPosition(), player.GetPosition(), spring.GetForce(), 0.0025);
+
 		///=== DRAW THINGS START ===
 		world.DrawPlayers(window.renderer); 
 		window.UpdateScreen();
