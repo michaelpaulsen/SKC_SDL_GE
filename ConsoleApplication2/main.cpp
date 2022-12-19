@@ -16,8 +16,8 @@ int windw = 1920, windh = 1080;
 size_t wFlags = SDL_WINDOW_SHOWN, rFlags = SDL_RENDERER_ACCELERATED;
 int main(int argc, char* args[]){
 	auto window = Skele_lib::SKGE::Window("test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windw, windh,wFlags,rFlags);
-	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, { 64, 64 }, { 0, 0 }, { 0.25, 0.25 });
-	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, { 64, 64 }, { 64, 0 }, { 0.5, 0.5 });
+	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, { 64, 64 }, { (double)windw/2, 0 }, { 0.025, 0.025 });
+	world.AddPlayer("C:/Users/Skele/source/repos/SKC_SDL_GE/ConsoleApplication2/img/testSprite.bmp", window.renderer, { 64, 64 }, { (double)(windw / 2)+64, 0 }, { 0.5, 0.5 });
 	world.GetPlayerAt(0).SetUVMap({ 0,0,16,16 });
 	world.GetPlayerAt(1).SetUVMap({ 16,0,16,16 });
 	eQue.registerEvent("SDL_KEYDOWN",            SDL_KEYDOWN,            [](SDL_Event e, Skele_lib::SKGE::World &world) {
@@ -79,15 +79,15 @@ int main(int argc, char* args[]){
 			}
 			quit = true; 
 		}
+		auto& player = world.GetPlayerAt(0);
+		auto& spring = world.GetPlayerAt(1);
+		Skele_lib::SKGE::Physics::CaculateAndAddSpringForce(spring.GetPosition(), player.GetPosition(), spring.GetForce(), 0.0025);
 		world.ApplyForceToPlayers();
 		world.BouncePlayersOffWorldBounds(windw, windh);
 		///=== DRAW START ===
 		window.SetDrawColor(255, 255, 255);		
 	
 		window.ClearScreenToDrawColor();
-		auto &player = world.GetPlayerAt(0); 
-		auto &spring = world.GetPlayerAt(1); 
-		Skele_lib::SKGE::Physics::CaculateAndAddSpringForce(spring.GetPosition(), player.GetPosition(), spring.GetForce(), 0.0025);
 
 		///=== DRAW THINGS START ===
 		world.DrawPlayers(window.renderer); 
