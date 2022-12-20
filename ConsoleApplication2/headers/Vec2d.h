@@ -34,8 +34,7 @@ namespace Skele_lib {
 				Vec2d AbsDist(Vec2d o) {return { fabs(m_x - o.m_x), fabs(m_y - o.m_y) };}
 				Vec2d Dist(Vec2d o) {return { (m_x - o.m_x), (m_y - o.m_y) };}
 				static Vec2d PosFromSDL_Rect(SDL_Rect rect) {return { (double)rect.x, (double)rect.y };}
-				double Fleng() {return m_x * m_x + m_y * m_y;}
-				
+				double Fleng() {return m_x * m_x + m_y * m_y;}	
 				Vec2d operator*(Vec2d o) {
 					Vec2d temp;
 					temp.m_x = m_x * o.m_x;
