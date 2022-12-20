@@ -19,6 +19,7 @@ namespace Skele_lib {
 			FrameN_t TFPS;
 			size_t m_players;
 			Player* l_players;
+			bool m_isPaused, m_isInInvintory; 
 		public:
 			long double fElapsedTime;
 			World(int tfs) {
@@ -38,8 +39,15 @@ namespace Skele_lib {
 				return l_players[index];
 
 			}
-			FrameN_t GetFrame() {return frame;}
-			size_t GetPlayerCount() { return m_players;}
+			FrameN_t GetFrame()     { return        frame; }
+			size_t GetPlayerCount() { return    m_players; }
+			bool IsPaused()         { return   m_isPaused; }
+			bool IsInInvintory() { return m_isInInvintory; }
+			void ToggleInvintory(bool puseGame = true) {
+				m_isInInvintory = !m_isInInvintory;
+				if (puseGame) m_isPaused = !m_isPaused;
+			}
+			void TogglePause() { m_isPaused = !m_isPaused;}
 			void AddPlayer(const char* path, SDL_Renderer* renderer, Vector::Vec2d _s, Vector::Vec2d _p, Vector::Vec2d _d) {
 				if (m_players != MAX_PLAYERS) {
 					l_players[m_players] = Player(path, renderer, _s, _p,_d);
