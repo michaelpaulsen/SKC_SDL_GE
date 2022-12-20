@@ -74,6 +74,20 @@ namespace Skele_lib {
 					temp.m_y = m_y - o.m_y;
 					return temp;
 				}
+				Vec2d operator-(double o) {
+					//this is a short hand for this - {o,o}; 
+					Vec2d temp;
+					temp.m_x = m_x - o;
+					temp.m_y = m_y - o;
+					return temp;
+				}
+				Vec2d operator+(double o) {
+					//this is a short hand for this - {o,o}; 
+					Vec2d temp;
+					temp.m_x = m_x + o;
+					temp.m_y = m_y + o;
+					return temp;
+				}
 				Vec2d operator/(double i) {
 					Vec2d temp;
 					temp.m_x = m_x / i;
@@ -109,6 +123,20 @@ namespace Skele_lib {
 				void operator+=(Vec2d o) {
 					m_x += o.m_x;
 					m_y += o.m_y;
+				}						  
+				void operator-=(double o) {
+					// this is not technically a valid operation in LA but this is a short hand for
+					// this - [o,o] wich is so that is why I implement it. 
+
+					m_x -= o;
+					m_y -= o;
+				}
+				void operator+=(double o) {
+					// this is not technically a valid operation in LA but this is a short hand for
+					// this + [o,o] wich is so that is why I implement it. 
+
+					m_x += o;
+					m_y += o;
 				}
 				void operator=(Vec2d o) {
 					m_x = o.m_x;
