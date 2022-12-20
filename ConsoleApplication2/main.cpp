@@ -81,7 +81,7 @@ int main(int argc, char* args[]){
 		}
 		auto& player = world.GetPlayerAt(0);
 		auto& spring = world.GetPlayerAt(1);
-		Skele_lib::SKGE::Physics::CaculateAndAddSpringForce(spring.GetPosition(), player.GetPosition(), spring.GetForce(), 0.0025);
+		Skele_lib::SKGE::Physics::CaculateAndAddSpringForce(spring.GetPosition(), player.GetPosition(), spring.GetForce(), 0.0025, 64);
 		world.ApplyForceToPlayers();
 		world.BouncePlayersOffWorldBounds(windw, windh);
 		///=== DRAW START ===
