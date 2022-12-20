@@ -20,6 +20,12 @@ namespace Skele_lib {
 					m_x = 0;
 					m_y = 0;
 				}
+				bool IsXLess(Vec2d o) {
+					return m_x < o.m_x; 
+				}
+				bool IsYLess(Vec2d o) {
+					return m_y < o.m_y; 
+				}
 				SDL_Rect ToSDL_Rect() {
 					//makes a sdl rect object at the origin and the width and height set to m_x and m_y respectivly; 
 					return { 0,0,(int)round(m_x),(int)round(m_y) }; //for some reason the c math lib has no way of casting to int with round (iround)
