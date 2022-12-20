@@ -146,6 +146,18 @@ namespace Skele_lib {
 					m_x = o;
 					m_y = o;
 				}
+				bool operator==(Vec2d o) {
+					return (m_x == o.m_x) && (m_y == o.m_x);
+				}
+				bool operator!=(Vec2d o) {
+					return !(*this == o);
+				}
+				bool operator<(Vec2d o) {
+					return (m_x < o.m_x) && (m_y < o.m_y);
+				}
+				bool operator<(Vec2d o) {
+					return (m_x > o.m_x) && (m_y > o.m_y);
+				}
 			};
 		}
 	}
