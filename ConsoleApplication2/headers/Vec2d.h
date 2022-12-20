@@ -29,8 +29,8 @@ namespace Skele_lib {
 				bool IsXMore(double o) { return m_x > o;}
 				bool IsYMore(double o) { return m_y > o;}
 				SDL_Rect ToSDL_Rect() { return { 0,0,(int)round(m_w),(int)round(m_h) };}
-				SDL_Rect AsOriginOfSDL_Rect(int width, int height) {return { (int)round(m_x),(int)round(m_y), width, height };
-				SDL_Rect AsOriginOfSDL_Rect(Vec2d o) {return { (int)round(m_x),(int)round(m_y),(int)round(o.m_x),(int)round(o.m_y) };}
+				SDL_Rect AsOriginOfSDL_Rect(int width, int height) { return { (int)round(m_x),(int)round(m_y), width, height }; }
+				SDL_Rect AsOriginOfSDL_Rect(Vec2d o) { return { (int)round(m_x),(int)round(m_y),(int)round(o.m_x),(int)round(o.m_y) };}
 				Vec2d AbsDist(Vec2d o) {return { fabs(m_x - o.m_x), fabs(m_y - o.m_y) };}
 				Vec2d Dist(Vec2d o) {return { (m_x - o.m_x), (m_y - o.m_y) };}
 				static Vec2d PosFromSDL_Rect(SDL_Rect rect) {return { (double)rect.x, (double)rect.y };}
