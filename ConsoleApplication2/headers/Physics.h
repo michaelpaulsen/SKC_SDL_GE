@@ -26,7 +26,6 @@ namespace Skele_lib {
 					position.m_x += force.m_x;
 					ApplyForce(force.m_x, drag.m_x);
 				}	
-				//maybe imlement this as a function to dry the code? 
 				if (force.m_y) {
 					position.m_y += force.m_y;
 					ApplyForce(force.m_y, drag.m_y);
