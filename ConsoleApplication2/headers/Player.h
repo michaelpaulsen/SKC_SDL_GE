@@ -28,41 +28,23 @@ namespace Skele_lib {
 				auto size = m_size * m_scale; 
 				return {(int)m_position.m_x,(int)m_position.m_y,(int)size.m_w,(int)size.m_h};
 			}
-			void SetUVMap(SDL_Rect uvm) {
-				m_sprite.SetUVMap(uvm);
-			}
-			void ClearUVMap() {
-				m_sprite.ClearUVMap();
-			}
+			void SetUVMap(SDL_Rect uvm) { m_sprite.SetUVMap(uvm);}
+			void ClearUVMap() { m_sprite.ClearUVMap();}
 			void SetXYScale(double scale) {
 				m_size = scale;
 				m_sprite.SetXYScale(scale); 
 			}
-			Vector::Vec2d GetScale() {
-				return m_scale;
-			}
-			Vector::Vec2d& GetPosition() {
-				return m_position;
-			}
-			Vector::Vec2d& GetDrag() {
-				return m_drag;
-			}
-			Vector::Vec2d& GetForce() {
-				return m_force; 
-			}
+			Vector::Vec2d GetScale() { return m_scale;}
+			Vector::Vec2d& GetPosition() { return m_position;}
+			Vector::Vec2d& GetDrag() { return m_drag;}
+			Vector::Vec2d& GetForce() { return m_force;}
 			void ClearScale() {
 				m_scale = {1,1}; //this is why we have m_baseSize 
 				m_sprite.ClearScale();
 			}
-			void DrawSprite(SDL_Renderer* renderer) {
-				m_sprite.DrawSprite(renderer, m_position.m_x, m_position.m_y);
-			}
-			void SetXScale(double scale) {
-				m_sprite.SetXScale(scale); 
-			}
-			void SetYScale(double scale) {
-				m_sprite.SetYScale(scale); 
-			}
+			void DrawSprite(SDL_Renderer* renderer) { m_sprite.DrawSprite(renderer, m_position.m_x, m_position.m_y);}
+			void SetXScale(double scale) { m_sprite.SetXScale(scale); }
+			void SetYScale(double scale) { m_sprite.SetYScale(scale); }
 		};
 	}
 }
