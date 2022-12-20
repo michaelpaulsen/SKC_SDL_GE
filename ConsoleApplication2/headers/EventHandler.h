@@ -34,10 +34,7 @@ namespace Skele_lib {
 				events.push_back(hndl);
 				//this should not be used as it copyies the handle instead of making one in place. 
 			}
-			void registerEvent(std::string n, Uint32 TID, EventHandler::CallBack_T hndl) {
-				events.emplace_back(n, TID, hndl);
-				//this constructs an handel in place this is the form of this function that should be used the most 
-			}
+			void registerEvent(std::string n, Uint32 TID, EventHandler::CallBack_T hndl) {events.emplace_back(n, TID, hndl);}
 			void registerEvent(EventHandler::CallBack_T hndl) {
 				events.emplace_back(hndl);
 				//this constructs an handel in place this is the form of this function that should be used the most 
