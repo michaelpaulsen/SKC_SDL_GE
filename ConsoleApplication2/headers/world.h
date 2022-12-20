@@ -17,7 +17,7 @@ namespace Skele_lib {
 			typedef unsigned long long FrameN_t;
 			FrameN_t frame;
 			FrameN_t TFPS;
-			size_t m_players;
+			size_t m_players, m_activeInvintory;
 			Player* l_players;
 			bool m_isPaused, m_isInInvintory; 
 		public:
@@ -39,11 +39,13 @@ namespace Skele_lib {
 				return l_players[index];
 
 			}
-			FrameN_t GetFrame()     { return        frame; }
-			size_t GetPlayerCount() { return    m_players; }
-			bool IsPaused()         { return   m_isPaused; }
-			bool IsInInvintory() { return m_isInInvintory; }
-			void ToggleInvintory(bool puseGame = true) {
+			FrameN_t GetFrame()        { return             frame; }
+			size_t GetPlayerCount()    { return         m_players; }
+			size_t GetActiveInvinory() { return m_activeInvintory; }
+			bool IsPaused()            { return        m_isPaused; }
+			bool IsInInvintory()       { return   m_isInInvintory; }
+			void ToggleInvintory(size_t pid = 0, bool puseGame = true) {
+				m_activeInvintory = pid; 
 				m_isInInvintory = !m_isInInvintory;
 				if (puseGame) m_isPaused = !m_isPaused;
 			}
