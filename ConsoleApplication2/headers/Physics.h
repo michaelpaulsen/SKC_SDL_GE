@@ -40,8 +40,9 @@ namespace Skele_lib {
 			void SetDragForce(Vector::Vec2d& m_drag, double drag) {
 				m_drag = drag;
 			};
-			void CaculateAndAddSpringForce(Vector::Vec2d actingObjectPos, Vector::Vec2d idleObjectPos, Vector::Vec2d& actingForce, double springValue, double minDist = 0) {
-				auto displacement = actingObjectPos.Dist(idleObjectPos);
+			void CaculateAndAddSpringForce(Vector::Vec2d AOP, Vector::Vec2d IOP, Vector::Vec2d& actingForce,
+				double springValue, double minDist = 0) {
+				auto displacement = AOP.Dist(IOP);
 				auto force = displacement * -springValue;
 				if (displacement.Fleng() > minDist*minDist) {
 					AddForce(actingForce, force);
