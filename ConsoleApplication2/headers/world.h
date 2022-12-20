@@ -80,7 +80,6 @@ namespace Skele_lib {
 			void SetTargetFPS(FrameN_t targetFPS) {
 				TFPS = targetFPS;
 			}
-
 		};
 	}
 }
