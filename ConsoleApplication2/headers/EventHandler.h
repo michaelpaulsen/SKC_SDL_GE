@@ -54,6 +54,18 @@ namespace Skele_lib {
 					printf("unhandled type %d (0x%x)\n", t->type, t->type);
 				}
 			}
+			void callEventByName(std::string name, SDL_Event* t, World world) {
+				bool found = false; // at least one callback was called 
+				for (auto& i : this->events) {
+					if (i.name == name) {
+						found = true;
+						i.callback(t, world);
+					}
+				}
+				if (!found) {
+					printf("unhandled name %s\n", name.c_str());
+				}
+			}
 		};
 	}
 }
