@@ -17,7 +17,7 @@ namespace Skele_lib {
 				m_score = 0; 
 			}
 			Player(const char* path, SDL_Renderer* renderer, Vector::Vec2d _s, Vector::Vec2d _p, Vector::Vec2d _d) {
-				m_sprite = Sprite(path, renderer,_s.m_x,_s.m_y);
+				m_sprite = Sprite(path, renderer,_s);
 				m_position = _p; 
 				m_size = _s;
 				m_force = { 0,0 };

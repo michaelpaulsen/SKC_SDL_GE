@@ -1,18 +1,19 @@
 #pragma once
 #include<SDL.h>
 #include<stdio.h>
+#include "./Vec2d.h"
 namespace Skele_lib {
 	namespace SKGE {
 		class Sprite {
 			SDL_Texture* m_texture = NULL;
-			double m_size_x, m_scale_x, m_size_y, m_scale_y;
+			Vector::Vec2d m_scale,  m_size; 
 			SDL_Rect* p_UVMap;
 		public:
 			Sprite() {
-				 m_scale_x = m_size_x = m_scale_y = m_size_y = 0;
+				 m_size = 0;
 				p_UVMap = NULL;
 			}
-			Sprite(const char* path, SDL_Renderer* renderer, double sizex, double sizey) {
+			Sprite(const char* path, SDL_Renderer* renderer, Vector::Vec2d size) {
 				SDL_Surface* loadedSurface = SDL_LoadBMP(path);
 				
 				p_UVMap = NULL;
@@ -21,14 +22,12 @@ namespace Skele_lib {
 					m_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
 					SDL_FreeSurface(loadedSurface);
 				}
-				m_size_x = m_size_y = sizey;
-				m_scale_x = m_scale_y = 1;
+				m_size  =  size;
+				m_scale = 1;
 			}
 			void DrawSprite( SDL_Renderer* renderer, int posx, int posy) {
-				double sizex, sizey;
-				sizex = m_scale_x * m_size_x;
-				sizey = m_scale_y * m_size_y;
-				SDL_Rect destrect = { posx, posy, sizex,sizey};
+				Vector::Vec2d realSize = m_scale * m_size;
+				SDL_Rect destrect = { posx, posy, realSize.m_w,realSize.m_h };
 				SDL_RenderCopy(renderer, this->m_texture, p_UVMap, &destrect);
 			}
 			void SetUVMap(SDL_Rect uvm) {
@@ -46,22 +45,22 @@ namespace Skele_lib {
 			}
 			
 			void SetXYScale(double scale) {
-				m_scale_x = scale;
-				m_scale_y = scale;
+				m_scale.m_x = scale;
+				m_scale.m_y = scale;
 			}
 			void GetScale(double& xScale, double& yScale) {
-				xScale = m_size_x;
-				yScale = m_size_y;
+				xScale = m_size.m_x;
+				yScale = m_size.m_y;
 			}
 			void SetXScale(double scale) {
-				m_scale_x = scale; 
+				m_scale.m_x = scale; 
 			}
 			void SetYScale(double scale) {
-				m_scale_y = scale; 
+				m_scale.m_y = scale; 
 			}
 			void ClearScale() {
-				m_scale_x = 1;  
-				m_scale_y = 1;  
+				m_scale.m_x = 1;  
+				m_scale.m_y = 1;  
 			}
 		};
 	}
