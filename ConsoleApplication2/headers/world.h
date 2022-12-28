@@ -15,7 +15,7 @@ namespace Skele_lib {
 	namespace SKGE {
 		class World {
 			typedef unsigned long long FrameN_t;
-			FrameN_t frame;
+			FrameN_t m_frame;
 			FrameN_t TFPS;
 			size_t m_players, m_activeInvintory;
 			Player* l_players;
@@ -24,7 +24,7 @@ namespace Skele_lib {
 			long double fElapsedTime;
 			World(int tfs) {
 				TFPS = tfs;
-				frame = 0;
+				m_frame = 0;
 				fElapsedTime = 0;
 				m_players = 0;
 				l_players = (Player*)malloc(sizeof(Player)*MAX_PLAYERS); 
@@ -39,7 +39,7 @@ namespace Skele_lib {
 				return l_players[index];
 
 			}
-			FrameN_t GetFrame()        { return             frame; }
+			FrameN_t GetFrame()        { return           m_frame; }
 			size_t GetPlayerCount()    { return         m_players; }
 			size_t GetActiveInvinory() { return m_activeInvintory; }
 			bool IsPaused()            { return        m_isPaused; }
@@ -67,7 +67,7 @@ namespace Skele_lib {
 					auto& player = l_players[i];
 					auto& force = player.GetForce();
 					auto& pos = player.GetPosition();
-					auto drag = player.GetDrag();
+					const auto& drag = player.GetDrag();
 					Skele_lib::SKGE::Physics::ApplyForceAndSetPos(pos, force, drag);
 				}
 			}
@@ -85,7 +85,7 @@ namespace Skele_lib {
 				}
 			}
 			void IncFrame() {
-				++frame;
+				++m_frame;
 			}
 			void SetTargetFPS(FrameN_t targetFPS) {
 				TFPS = targetFPS;
