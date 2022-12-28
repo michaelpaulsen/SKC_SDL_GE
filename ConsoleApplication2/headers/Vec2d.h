@@ -36,8 +36,10 @@ namespace Skele_lib {
 				SDL_Rect ToSDL_Rect() { return { 0,0,(int)round(m_w),(int)round(m_h) };}
 				SDL_Rect AsOriginOfSDL_Rect(int width, int height) { return { (int)round(m_x),(int)round(m_y), width, height }; }
 				SDL_Rect AsOriginOfSDL_Rect(Vec2 o) { return { (int)round(m_x),(int)round(m_y),(int)round(o.m_x),(int)round(o.m_y) };}
-				Vec2 AbsDist( Vec2 o) { return { tabs(m_x - o.m_x), tabs(m_y - o.m_y) };}
-				Vec2 Dist   ( Vec2 o) { return {     (m_x - o.m_x),     (m_y - o.m_y) };}
+				Vec2 AbsDist  ( Vec2 o) { return { tabs(m_x - o.m_x), tabs(m_y - o.m_y) };}
+				Vec2 Dist     ( Vec2 o) { return {     (m_x - o.m_x),     (m_y - o.m_y) };}
+				Vec2 Normalize()        { return *this / sqrt(this->Fleng()); }
+				Vec2 Norm()             { return *this / sqrt(this->Fleng()); }
 				static Vec2 PosFromSDL_Rect(SDL_Rect rect) {return { (T)rect.x, (T)rect.y};}
 				double Fleng() {return m_x * m_x + m_y * m_y;}	
 				Vec2 operator*(Vec2 o) {
