@@ -5,6 +5,7 @@
 namespace Skele_lib {
 	namespace SKGE {
 		struct Window {
+            typedef unsigned char ucolor_t; 
 			SDL_Window* window = NULL;
 			SDL_Renderer* renderer = NULL;
 			Vector::Vec2d WindowSize;
@@ -27,7 +28,7 @@ namespace Skele_lib {
 			void UpdateScreen() {
 				SDL_RenderPresent(renderer); 
 			}
-			void SetDrawColor(char r, char g, char b, char a = 255) {
+			void SetDrawColor(ucolor_t r, ucolor_t g, ucolor_t b, ucolor_t a = 255) {
 				SDL_SetRenderDrawColor(renderer, r, g, b, a);
 				lastColor.r = r; 
 				lastColor.g = g; 
