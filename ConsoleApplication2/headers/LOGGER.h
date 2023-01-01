@@ -36,7 +36,7 @@ namespace Skele_lib {
 				va_end(args);
 				return leng;
 			}
-			size_t PrintTo( const int endpos, const int startpos = 0) {
+			size_t PrintTo(const int endpos, const int startpos = 0) {
 				size_t pos = startpos, retval = 0; 
 				while (pos < endpos) {
 					auto incval = printf(" "); 
