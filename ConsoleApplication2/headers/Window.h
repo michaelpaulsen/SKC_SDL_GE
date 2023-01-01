@@ -42,43 +42,22 @@ namespace Skele_lib {
 				auto r = WindowSizeToSdlRect(); 
 				SDL_RenderFillRect(renderer, &r);
 			}
-            int RenderDrawCircle(SDL_Renderer* renderer, int x, int y, int radius) {
-                int offsetx, offsety, d;
-                int status;
-                offsetx = 0;
-                offsety = radius;
-                d = radius - 1;
-                status = 0;
-                while (offsety >= offsetx) {
-                    status += SDL_RenderDrawPoint(renderer, x + offsetx, y + offsety);
-                    status += SDL_RenderDrawPoint(renderer, x + offsety, y + offsetx);
-                    status += SDL_RenderDrawPoint(renderer, x - offsetx, y + offsety);
-                    status += SDL_RenderDrawPoint(renderer, x - offsety, y + offsetx);
-                    status += SDL_RenderDrawPoint(renderer, x + offsetx, y - offsety);
-                    status += SDL_RenderDrawPoint(renderer, x + offsety, y - offsetx);
-                    status += SDL_RenderDrawPoint(renderer, x - offsetx, y - offsety);
-                    status += SDL_RenderDrawPoint(renderer, x - offsety, y - offsetx);
-                    if (status < 0) {
-                        status = -1;
-                        break;
-                    }
-                    if (d >= 2 * offsetx) {
-                        d -= 2 * offsetx + 1;
-                        offsetx += 1;
-                    }
-                    else if (d < 2 * (radius - offsety)) {
-                        d += 2 * offsety - 1;
-                        offsety -= 1;
-                    }
-                    else {
-                        d += 2 * (offsety - offsetx - 1);
-                        offsety -= 1;
-                        offsetx += 1;
+            void RenderFilledCircle(SDL_Renderer* renderer, double tx, double ty, double r) {
+                double topbound = ty - r;
+                double bottombound = ty + r;
+                double leftbound = tx - r;
+                double rightbound = tx + r;
+                for (double y = topbound; y < bottombound; y++) {
+                    for (double x = leftbound; x < rightbound; x++) {
+                        double dx = (tx - x);
+                        double dy = (ty - y);
+                        if (dx * dx + dy * dy <= r * r) {
+                            SDL_RenderDrawPoint(renderer, x, y);
+                        }
                     }
                 }
-                return status;
             }
-            int RenderFillCircle(int x, int y, int radius) {
+            void  RenderDrawCircle(int x, int y, int radius) {
                 int offsetx, offsety, d;
                 int status;
                 offsetx = 0;
@@ -86,14 +65,14 @@ namespace Skele_lib {
                 d = radius - 1;
                 status = 0;
                 while (offsety >= offsetx) {
-                    status += SDL_RenderDrawLine(renderer, x - offsety, y + offsetx,
-                        x + offsety, y + offsetx);
-                    status += SDL_RenderDrawLine(renderer, x - offsetx, y + offsety,
-                        x + offsetx, y + offsety);
-                    status += SDL_RenderDrawLine(renderer, x - offsetx, y - offsety,
-                        x + offsetx, y - offsety);
-                    status += SDL_RenderDrawLine(renderer, x - offsety, y - offsetx,
-                        x + offsety, y - offsetx);
+                     SDL_RenderDrawPoint(renderer, x + offsetx, y + offsety);
+                     SDL_RenderDrawPoint(renderer, x + offsety, y + offsetx);
+                     SDL_RenderDrawPoint(renderer, x - offsetx, y + offsety);
+                     SDL_RenderDrawPoint(renderer, x - offsety, y + offsetx);
+                     SDL_RenderDrawPoint(renderer, x + offsetx, y - offsety);
+                     SDL_RenderDrawPoint(renderer, x + offsety, y - offsetx);
+                     SDL_RenderDrawPoint(renderer, x - offsetx, y - offsety);
+                     SDL_RenderDrawPoint(renderer, x - offsety, y - offsetx);
                     if (status < 0) {
                         status = -1;
                         break;
@@ -112,7 +91,6 @@ namespace Skele_lib {
                         offsetx += 1;
                     }
                 }
-                return status;
             }
             int RenderFillRect(int x, int y, int w, int h) {
                 SDL_Rect rect = { x,y,w,h }; 
