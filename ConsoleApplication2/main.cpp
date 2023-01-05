@@ -47,22 +47,6 @@ int main(int argc, char* args[]){
 
 			}
 			});
-	eQue.registerEvent("SDL_MOUSEMOTION",		        { SDL_MOUSEMOTION, true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_WINDOWEVENT",               { SDL_WINDOWEVENT, true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_KEYDOWN",                         { SDL_KEYUP, true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_TEXTEDITING",               { SDL_TEXTEDITING, true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_KEYMAPCHANGED",           { SDL_KEYMAPCHANGED, true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_AUDIODEVICEADDED",     { SDL_AUDIODEVICEADDED, true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_AUDIODEVICEREMOVED", { SDL_AUDIODEVICEREMOVED, true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_MOUSEBUTTONDOWN",        { SDL_MOUSEBUTTONDOWN,true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_MOUSEBUTTONUP",            { SDL_MOUSEBUTTONUP,true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_MOUSEWHEEL",                  { SDL_MOUSEWHEEL,true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_TEXTINPUT",			          { SDL_TEXTINPUT, true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("SDL_KEYMAPCHANGED",            { SDL_KEYMAPCHANGED,true}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
-	eQue.registerEvent("P_hit_top_bound",                            { 0, false}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) { printf("player %llu hit the         top of the world\n",pid+1); });
-	eQue.registerEvent("P_hit_bottom_bound",                         { 0, false}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) { printf("player %llu hit the      bottom of the world\n",pid+1); });
-	eQue.registerEvent("P_hit_left_bound",                           { 0, false}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) { printf("player %llu hit the left  bound of the world\n",pid+1); });
-	eQue.registerEvent("P_hit_right_bound",                          { 0, false}, [](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) { printf("player %llu hit the right bound of the world\n",pid+1); });
 	auto sdlinitstate = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 	if (sdlinitstate  < 0){
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());

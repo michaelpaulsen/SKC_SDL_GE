@@ -1,0 +1,17 @@
+eQue.registerEvent("SDL_MOUSEMOTION",		        { SDL_MOUSEMOTION, true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_WINDOWEVENT",               { SDL_WINDOWEVENT, true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_KEYDOWN",                         { SDL_KEYUP, true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_TEXTEDITING",               { SDL_TEXTEDITING, true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_KEYMAPCHANGED",           { SDL_KEYMAPCHANGED, true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_AUDIODEVICEADDED",     { SDL_AUDIODEVICEADDED, true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_AUDIODEVICEREMOVED", { SDL_AUDIODEVICEREMOVED, true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_MOUSEBUTTONDOWN",        { SDL_MOUSEBUTTONDOWN,true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_MOUSEBUTTONUP",            { SDL_MOUSEBUTTONUP,true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_MOUSEWHEEL",                  { SDL_MOUSEWHEEL,true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_TEXTINPUT",			          { SDL_TEXTINPUT, true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("SDL_KEYMAPCHANGED",            { SDL_KEYMAPCHANGED,true}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("P_hit_top_bound",                            { 0, false}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("P_hit_bottom_bound",                         { 0, false}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("P_hit_left_bound",                           { 0, false}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	eQue.registerEvent("P_hit_right_bound",                          { 0, false}, [mil, mwl, mdl, mel](const SDL_Event* e, Skele_lib::SKGE::World &world,size_t pid) {});
+	
