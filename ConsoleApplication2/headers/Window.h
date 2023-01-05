@@ -92,7 +92,7 @@ namespace Skele_lib {
                     }
                 }
             }
-            int RenderFillRect(int x, int y, int w, int h) {
+            void RenderFillRect(int x, int y, int w, int h) {
                 SDL_Rect rect = { x,y,w,h }; 
                 SDL_RenderFillRect(renderer, &rect);
             }
