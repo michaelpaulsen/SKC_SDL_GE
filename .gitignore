@@ -10,6 +10,11 @@ ConsoleApplication2/x64/Release/vc143.pdb
 Debug/ConsoleApplication2.pdb
 x64/Debug/ConsoleApplication2.pdb
 x64/Release/ConsoleApplication2.pdb
+x64/Debug/SKC_SDL_GE.pdb
+x64/Debug/SDL2.dll
+ConsoleApplication2/x64/Release/
+x64/Release/
+ConsoleApplication2/assets/
 
 *.tlog
 *.recipe
@@ -26,7 +31,3 @@ x64/Release/ConsoleApplication2.pdb
 *.ipbd
 *.exe
 *.sln
-x64/Debug/SKC_SDL_GE.pdb
-x64/Debug/SDL2.dll
-ConsoleApplication2/x64/Release/SKC_SDL_GE.ipdb
-x64/Release/SKC_SDL_GE.pdb
