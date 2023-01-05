@@ -101,6 +101,10 @@ namespace Skele_lib {
                 SDL_RenderDrawLine(renderer, x2, y2, x3, y3); 
                 SDL_RenderDrawLine(renderer, x1, y1, x3, y3); 
             }
+            void RenderDrawLines(SDL_Point* pos, const size_t count) {
+                SDL_RenderDrawLines(renderer, pos, count);
+            }
+
 		};
 	}
 }
