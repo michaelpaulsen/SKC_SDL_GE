@@ -96,6 +96,11 @@ namespace Skele_lib {
                 SDL_Rect rect = { x,y,w,h }; 
                 SDL_RenderFillRect(renderer, &rect);
             }
+            void RenderDrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3){
+                SDL_RenderDrawLine(renderer, x1, y1, x2, y2); 
+                SDL_RenderDrawLine(renderer, x2, y2, x3, y3); 
+                SDL_RenderDrawLine(renderer, x1, y1, x3, y3); 
+            }
 		};
 	}
 }
