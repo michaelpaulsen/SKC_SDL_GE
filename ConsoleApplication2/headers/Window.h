@@ -126,6 +126,10 @@ namespace Skele_lib {
                 SDL_RenderDrawLines(renderer, pos, count);
             }
             void SetWindowTitle(const char *title) {SDL_SetWindowTitle(window, title);}
+            void RenderDrawRect(int x, int y, int w, int h) {
+                SDL_Rect r = { x,y,w,h };
+                SDL_RenderDrawRect(renderer, &r);
+            }
             void DrawInventory(int cols, int rows) {
                 static bool debug = true; 
                 int w = ((float)windowSize.m_w/(float)cols-1);
@@ -144,6 +148,8 @@ namespace Skele_lib {
                         }
                         
                         RenderFillRect(x, y, w, h); 
+                        SetDrawColor(0, 0, 0); 
+                        RenderDrawRect(x, y, w, h);
                         count++;
                     }
 
