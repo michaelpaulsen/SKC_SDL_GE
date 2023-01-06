@@ -8,14 +8,35 @@ namespace Skele_lib {
             typedef unsigned char ucolor_t; 
 			SDL_Window* window = NULL;
 			SDL_Renderer* renderer = NULL;
-			Vector::Vec2d WindowSize;
+			Vector::Vec2i windowSize;
 			Vector::Vec3d lastColor;
-			char lastAlpha; 
+            bool m_isPaused = false, m_isInInvintory = false;
+            size_t m_activeInvintory;
+            char lastAlpha;
+
+            size_t GetActiveInvinory() { return m_activeInvintory; }
+            bool IsPaused()      {return         m_isPaused; }
+            bool IsInInvintory() { return   m_isInInvintory; }
+            void SetPuase(bool p) {
+                m_isPaused = p;
+            }
+            void TogglePause() {
+                if (m_isPaused) {
+                    m_isPaused = false;
+
+                }
+                else {
+                    m_isPaused = true;
+                }
+            }
+            void ToggleInvintory(size_t pid = 0, bool puseGame = true) {
+                m_activeInvintory = pid;
+                m_isInInvintory = !m_isInInvintory;
+            }
 			Window(const char* title, int x, int y, int w, int h, Uint32 windowFlags, Uint32 rendererFlags) {
 				window = SDL_CreateWindow(title, x, y, w, h, windowFlags);
 				renderer = SDL_CreateRenderer(window, -1, rendererFlags);
-				WindowSize.m_x = w; 
-				WindowSize.m_y = h;
+				windowSize = {w,h}; 
 				lastAlpha = 0; 
 			}
 			~Window() {
@@ -36,7 +57,7 @@ namespace Skele_lib {
 				lastAlpha   = a;
 			}
 			SDL_Rect WindowSizeToSdlRect() {
-				return { 0,0, (int)WindowSize.m_x,(int)WindowSize.m_y };
+				return { 0,0, (int)windowSize.m_x,(int)windowSize.m_y };
 			}
 			void ClearScreenToDrawColor() {
 				auto r = WindowSizeToSdlRect(); 
