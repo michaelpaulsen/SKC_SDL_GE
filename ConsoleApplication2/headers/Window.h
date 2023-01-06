@@ -104,7 +104,7 @@ namespace Skele_lib {
             void RenderDrawLines(SDL_Point* pos, const size_t count) {
                 SDL_RenderDrawLines(renderer, pos, count);
             }
-
+            void SetWindowTitle(const char *title) {SDL_SetWindowTitle(window, title);}
 		};
 	}
 }
