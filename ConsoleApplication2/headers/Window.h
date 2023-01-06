@@ -42,7 +42,7 @@ namespace Skele_lib {
 				auto r = WindowSizeToSdlRect(); 
 				SDL_RenderFillRect(renderer, &r);
 			}
-            void RenderFilledCircle(SDL_Renderer* renderer, double tx, double ty, double r) {
+            void RenderFilledCircle( double tx, double ty, double r) {
                 double topbound = ty - r;
                 double bottombound = ty + r;
                 double leftbound = tx - r;

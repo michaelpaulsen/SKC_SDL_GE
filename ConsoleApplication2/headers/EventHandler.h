@@ -50,7 +50,7 @@ namespace Skele_lib {
 					}
 				}
 				if (!found) {
-					printf("unhandled type %d (0x%x)\n", t->type, t->type);
+					printf("unhandled type %d (0x%x)                                                     \r", t->type, t->type);
 				}
 			}
 			void callEventByName(std::string name, SDL_Event* t, World world, size_t pid) {
@@ -62,7 +62,7 @@ namespace Skele_lib {
 					}
 				}
 				if (!found) {
-					printf("unhandled name %s\n", name.c_str());
+					printf("unhandled name %s                                                     \r", name.c_str());
 				}
 			}
 		};
