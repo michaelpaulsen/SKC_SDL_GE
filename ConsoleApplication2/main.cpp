@@ -1,6 +1,7 @@
 #define skc_W64
 #include <SDL.h>
 #include <stdio.h>
+#include <thread>
 #include <chrono>
 #include <random>
 #include "./headers/EventHandler.h"
@@ -10,16 +11,15 @@
 #include "./headers/Window.h"
 #include "./headers/Player.h"
 #include "./headers/Physics.h"
-#include "./headers/LayoutMNGR.h"
 #include "./headers/LOGGER.h"
-#include "./headers/resourceMNGR/rcm.h"
 #include "./headers/RNG.h"
 #include "./headers/Counter.h"
-
+#include "./headers/KeyModifiers.h"
+#define CBuffer(name, size) char name[size] 
+#define clearBuffer(s, size, buffer) for(size_t s = 0; s < size; s++){buffer[s] = 0;}
 int main(int argc, char* args[]) {
-	
 	///=== creating world ===  
-	const int targetFPS = 30; 
+	const int targetFPS = 60; 
 	auto world = Skele_lib::SKGE::World(targetFPS);
 	///=== creating frame limiting stuff ===
 	Skele_lib::SKGE::Timer::chrono_sysclock_t tp1, tp2;
@@ -44,10 +44,10 @@ int main(int argc, char* args[]) {
 	///=== create Event Timers ===
 	auto triangleTimer = Skele_lib::SKGE::Counter();
 	auto rectcounter = Skele_lib::SKGE::Counter();
-	triangleTimer.setLeng(3);
-	triangleTimer.setMax(10); 
-	rectcounter.setLeng(2); 
-	rectcounter.setMax(3); 
+	triangleTimer.setLeng(25);
+	triangleTimer.setMax(100); 
+	rectcounter.setLeng(10); 
+	rectcounter.setMax(50); 
 	///=== creating window ===
 	int windw = 1920, windh = 1080;
 	uint32_t wFlags = SDL_WINDOW_SHOWN, rFlags = SDL_RENDERER_ACCELERATED;
@@ -58,43 +58,27 @@ int main(int argc, char* args[]) {
 	int minr = 0, maxr = 100;
 	int NUM_POINTS = 100;
 	Skele_lib::SKGE::RNG rng;
+	/// draw the frame
+	bool drawFrame = true;
+	bool showinv = false;
 	///=== registering the keydown event===
-	eQue.registerEvent("SDL_KEYDOWN",        { SDL_KEYDOWN, true }, [mil, mwl, mdl, mel, &minr, &maxr, &NUM_POINTS](const SDL_Event* e, Skele_lib::SKGE::World& world, size_t pid) {
+	eQue.registerEvent("SDL_KEYDOWN",        { SDL_KEYDOWN, true }, [mil, mwl, mdl, mel,&window, &drawFrame, &showinv](const SDL_Event* e, Skele_lib::SKGE::World& world, size_t pid) {
 		auto sym = e->key.keysym.sym;
-		auto& player = world.GetPlayerAt(0);
+		printf("SDL_KEDOWN EVENT PROC %c                               \n", sym);
+		window.SetPuase(true);
+
 		switch (sym) {
-			case 'w': {
-				maxr*=10;
-				mil.Log("maxr is now %d                    \r", maxr);
+			case 'q': {
+				drawFrame = !drawFrame; 
 				break; 
 			}
-			case 's': {
-				if (maxr == 10)break; 
-				maxr/=10;
-				mil.Log("maxr is now %d                    \r", maxr);
-				break; 
-			}
-			case'd': {
-				NUM_POINTS++;
-				break; 
-			}
-			case 'a': {
-				NUM_POINTS--;
-				break; 
-			}
-			case 'r': {
-				minr*=10;
-				mil.Log("minr is now %d                    \r", minr);
-				break; 
-			}
-			case 'f': {
-				if (minr <= 0)break;
-				minr/=10;
-				mil.Log("minr is now %d                    \r", minr);
+			case 'e': {
+				showinv = !showinv; 
 				break; 
 			}
 			default: {
-				printf("unhandled key press %c (0x%x)                    \r", sym, sym); 
+				
+				mil.Log("unhandled key %c press (0x%x)                    \n", sym, sym); 
 				return;
 			}
 
@@ -119,17 +103,12 @@ int main(int argc, char* args[]) {
 			rectcounter(world, eQue); 
 		}
 	});
-
-	
 	///=== set up the random things that I don't have a better owner for===
 	SDL_Event e;
 	bool quit = false;
-	bool drawFrame = true;
-
-	
 	///=== init the first time point===
 	tp1 = std::chrono::system_clock::now();
-
+	CBuffer(titlebuffer, 200); 
 	///=== main loop ===
 	while (!quit) {
 		while (SDL_PollEvent(&e)) {
@@ -143,36 +122,50 @@ int main(int argc, char* args[]) {
 
 		///=== DRAW START ===
 		
-		if(drawFrame){ 
+		if (drawFrame) {
 			window.SetDrawColor(0, 0, 0);
 			window.ClearScreenToDrawColor();
-
 			window.SetDrawColor(255, 255, 0);
-			for (size_t i = 0; i < NUM_POINTS; i++){
-				auto randomNumber = rng.GetNextNumberAsPercent(minr,maxr);
-				float ty = ((float)windh * (((randomNumber * 2) - 1) / 2));
-				int px = (int)(i * ((double)windw / NUM_POINTS));
-				int py = ty + (windh / 2);
-				points[i] = { px,py };
+			if (!showinv) {
+				for (size_t i = 0; i < NUM_POINTS; i++) {
+					auto randomNumber = rng.GetNextNumberAsPercent(minr, maxr);
+					float ty = ((float)windh * (((randomNumber * 2) - 1) / 2));
+					int px = (int)(i * ((double)windw / NUM_POINTS));
+					int py = ty + (windh / 2);
+					points[i] = { px,py };
+				}
 			}
-			triangleTimer(world, eQue); 
 			window.RenderDrawLines(points, NUM_POINTS);
+			if (showinv) {
+				window.DrawInventory(9,5);
+			}
+			if (SDL_GetError()[0] != 0) {
+				mel.Log("Frame %llu -> SDL_ERROR  %s", world.GetFrame(), SDL_GetError()); 
+				exit(-1); 
+			}
+			triangleTimer(world,eQue);
+			window.UpdateScreen();
+			
 		}
-		window.UpdateScreen();
-		
-		
 		///=== DRAW THINGS START ===
-		///=== DRAW THINGS END   ===
-		///=== DRAW        END   ===
+		///=== DRAW THINGS   END ===
+		///=== DRAW          END ===
+		///=== Increment the frame counter ===
+		clearBuffer(u, 200, titlebuffer);
+#ifdef _DEBUG
+		
+		sprintf_s(titlebuffer, "%s - %f fps [DEBUG] drawing %d showing invintory %d ","ENTER GAME TITLE HERE", 1.0 / world.dElapsedTime, drawFrame, showinv);
+
+#elif
+		sprintf_s(titlebuffer, "%s %s", "ENTER GAME TITLE HERE",  1.0 / world.dElapsedTime, drawFrame ? "" : "[paused]");
+#endif // DEBUG
+		window.SetWindowTitle(titlebuffer);
+		world.IncFrame();
+		
 		///=== Frame Limit Start === 
 		tp2 = std::chrono::system_clock::now();
-		Skele_lib::SKGE::Timer::Wait(tp1, tp2, world.GetFrameTime(), world.fElapsedTime);
+		Skele_lib::SKGE::Timer::Wait(tp1, tp2, world.GetFrameTime(), world.dElapsedTime);
 		tp1 = tp2;
-
-		///=== Increment the frame counter ===
-		//printf("elapsed time = %f\r", world.fElapsedTime);
-		world.IncFrame();
-		drawFrame = !((world.GetFrame()%30)); 
 	}
 	///===quit the sdl instance===
 	SDL_Quit();
