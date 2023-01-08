@@ -147,10 +147,14 @@ int main(int argc, char* args[]) {
 			window.UpdateScreen();
 			
 		}
-		///=== DRAW THINGS START ===
-		///=== DRAW THINGS   END ===
-		///=== DRAW          END ===
+		world.DrawPlayers(window.renderer); 
+		///===================================
+		///=== DRAW THINGS           START ===
+		/// 
+		///=== DRAW THINGS             END ===
+		///=== DRAW                    END ===
 		///=== Increment the frame counter ===
+		///===================================
 		clearBuffer(u, 200, titlebuffer);
 #ifdef _DEBUG
 		
