@@ -1,13 +1,7 @@
 #pragma once
 #include <cstdarg> 
 
-#ifndef CSTRING  
-#define CSTRING  char* 
-#endif // !CSTRING  
-#ifndef cCSTRING  
-#define cCSTRING  const char* 
-#endif // !CSTRING  
-
+#include "Defines.h"
 namespace Skele_lib {
 	namespace SKGE {
 		class LOGGER {
