@@ -17,6 +17,7 @@ namespace Skele_lib {
 				union {
 					T m_y, m_h;
 				};
+				explicit Vec2(T s) { m_x = m_y = s; }
 				Vec2(T x, T y) {
 					m_x = x;
 					m_y = y;
