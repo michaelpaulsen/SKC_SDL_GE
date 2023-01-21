@@ -4,17 +4,19 @@
 #include <thread>
 #include <chrono>
 #include <random>
-#include "./headers/EventHandler.h"
-#include "./headers/funtions.h"
-#include "./headers/Timer.h"
-#include "./headers/world.h"
-#include "./headers/Window.h"
-#include "./headers/Player.h"
-#include "./headers/Physics.h"
-#include "./headers/LOGGER.h"
-#include "./headers/RNG.h"
-#include "./headers/Counter.h"
-#include "./headers/KeyModifiers.h"
+#include "headers/EventHandler.h"
+#include "headers/KeyModifiers.h"
+#include     "headers/funtions.h"
+#include      "headers/Physics.h"
+#include      "headers/Counter.h"
+#include      "headers/Defines.h"
+#include       "headers/Player.h"
+#include       "headers/Window.h"
+#include       "headers/LOGGER.h"
+#include        "headers/Level.h"
+#include        "headers/Timer.h"
+#include        "headers/world.h"
+#include          "headers/RNG.h"
 #define CBuffer(name, size) char name[size] 
 #define clearBuffer(s, size, buffer) for(size_t s = 0; s < size; s++){buffer[s] = 0;}
 int main(int argc, char* args[]) {
