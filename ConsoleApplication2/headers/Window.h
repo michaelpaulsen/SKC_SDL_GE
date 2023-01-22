@@ -8,6 +8,7 @@ namespace Skele_lib {
 		struct Window {
             typedef unsigned char ucolor_t; 
 			SDL_Window* window = NULL;
+            std::string windowTitle; 
 			SDL_Renderer* renderer = NULL;
 			Vector::Vec2i windowSize;
 			Vector::Vec3d lastColor;
@@ -20,11 +21,10 @@ namespace Skele_lib {
             bool IsInInvintory()                       { return   m_isInInvintory;           }
             void SetPuase(bool p)                      { m_isPaused = p;                     }
             void TogglePause()                         { m_isPaused = m_isPaused?false:true; }
-            void SetWindowTitle(const char* title)     { SDL_SetWindowTitle(window, title);  }
             void SetWindowTitle(const std::string str) { SetWindowTitle(str.c_str());        }
-
-			Window(const char* title, int x, int y, int w, int h, Uint32 windowFlags, Uint32 rendererFlags) {
-				window = SDL_CreateWindow(title, x, y, w, h, windowFlags);
+            Window(std::string title, int x, int y, int w, int h, Uint32 windowFlags, Uint32 rendererFlags) {
+                windowTitle = title; 
+                window = SDL_CreateWindow(title.c_str(), x, y, w, h, windowFlags);
 				renderer = SDL_CreateRenderer(window, -1, rendererFlags);
 				windowSize = {w,h}; 
 				lastAlpha = 0; 
@@ -33,7 +33,10 @@ namespace Skele_lib {
 				SDL_DestroyRenderer(renderer);
 				SDL_DestroyWindow(window); 
 			}
-            
+            void SetWindowTitle(const char* title) {
+                windowTitle = title;
+                SDL_SetWindowTitle(window, title);
+            }
             void ToggleInvintory(size_t pid = 0, bool puseGame = true) {
                 m_activeInvintory = pid;
                 m_isInInvintory = !m_isInInvintory;
