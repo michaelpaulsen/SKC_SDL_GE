@@ -7,7 +7,6 @@
 #ifndef coutf
 #define coutf  std::cout << std::format
 #endif
-
 #ifndef CSTRING  
 #define CSTRING  char* 
 #endif // !CSTRING  
