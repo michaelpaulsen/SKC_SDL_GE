@@ -14,7 +14,7 @@ namespace Skele_lib {
 					m_name[i] = name[i]; 
 					++i;
 				}
-				m_name[i++] = 0; 
+				m_name[i] = 0; 
 			}
 			size_t Log(cCSTRING  fmt, ...) const {
 				size_t leng = 0; 
