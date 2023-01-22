@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "./vec3d.h"
 #include "Vec2d.h"
+#include "Defines.h"
 namespace Skele_lib {
 	namespace SKGE {
 		struct Window {
@@ -14,25 +15,14 @@ namespace Skele_lib {
             size_t m_activeInvintory;
             char lastAlpha;
 
-            size_t GetActiveInvinory() { return m_activeInvintory; }
-            bool IsPaused()      {return         m_isPaused; }
-            bool IsInInvintory() { return   m_isInInvintory; }
-            void SetPuase(bool p) {
-                m_isPaused = p;
-            }
-            void TogglePause() {
-                if (m_isPaused) {
-                    m_isPaused = false;
+            size_t GetActiveInvinory()                 { return m_activeInvintory;           }
+            bool IsPaused()                            { return        m_isPaused;           }
+            bool IsInInvintory()                       { return   m_isInInvintory;           }
+            void SetPuase(bool p)                      { m_isPaused = p;                     }
+            void TogglePause()                         { m_isPaused = m_isPaused?false:true; }
+            void SetWindowTitle(const char* title)     { SDL_SetWindowTitle(window, title);  }
+            void SetWindowTitle(const std::string str) { SetWindowTitle(str.c_str());        }
 
-                }
-                else {
-                    m_isPaused = true;
-                }
-            }
-            void ToggleInvintory(size_t pid = 0, bool puseGame = true) {
-                m_activeInvintory = pid;
-                m_isInInvintory = !m_isInInvintory;
-            }
 			Window(const char* title, int x, int y, int w, int h, Uint32 windowFlags, Uint32 rendererFlags) {
 				window = SDL_CreateWindow(title, x, y, w, h, windowFlags);
 				renderer = SDL_CreateRenderer(window, -1, rendererFlags);
@@ -43,7 +33,12 @@ namespace Skele_lib {
 				SDL_DestroyRenderer(renderer);
 				SDL_DestroyWindow(window); 
 			}
-			void ClearRenderer() {
+            
+            void ToggleInvintory(size_t pid = 0, bool puseGame = true) {
+                m_activeInvintory = pid;
+                m_isInInvintory = !m_isInInvintory;
+            }
+            void ClearRenderer() {
 				SDL_RenderClear(renderer);
 			}
 			void UpdateScreen() {
@@ -125,7 +120,6 @@ namespace Skele_lib {
             void RenderDrawLines(SDL_Point* pos, const size_t count) {
                 SDL_RenderDrawLines(renderer, pos, count);
             }
-            void SetWindowTitle(const char *title) {SDL_SetWindowTitle(window, title);}
             void RenderDrawRect(int x, int y, int w, int h) {
                 SDL_Rect r = { x,y,w,h };
                 SDL_RenderDrawRect(renderer, &r);
