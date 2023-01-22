@@ -152,7 +152,7 @@ namespace Skele_lib {
                 }
                 debug = false; 
             }
-            auto TakeScreenShot(std::string path) {
+            auto TakeScreenShot() {
                 auto surface = SDL_GetWindowSurface(window);
                 auto now = std::chrono::system_clock::now();
                 auto h = std::format("{:%H}", now);
