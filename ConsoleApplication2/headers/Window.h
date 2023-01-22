@@ -153,6 +153,17 @@ namespace Skele_lib {
                 }
                 debug = false; 
             }
+            auto TakeScreenShot(std::string path) {
+                auto surface = SDL_GetWindowSurface(window);
+                auto now = std::chrono::system_clock::now();
+                auto h = std::format("{:%H}", now);
+                auto s = std::format("{:%S}", now);
+                auto i = std::format("{:%M}", now);
+                auto path = std::format("./screenshots/{}-{}.{}.{:0>2.2}.bmp", windowTitle, h, i, s);
+                return SDL_SaveBMP(surface, path.c_str()); 
+                //int SDL_SaveBMP(SDL_Surface * surface,
+                //                const char* file)
+            }
 		};
 	}
 }
