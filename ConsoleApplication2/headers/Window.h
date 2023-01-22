@@ -15,7 +15,6 @@ namespace Skele_lib {
             bool m_isPaused = false, m_isInInvintory = false;
             size_t m_activeInvintory;
             char lastAlpha;
-
             size_t GetActiveInvinory()                 { return m_activeInvintory;           }
             bool IsPaused()                            { return        m_isPaused;           }
             bool IsInInvintory()                       { return   m_isInInvintory;           }
