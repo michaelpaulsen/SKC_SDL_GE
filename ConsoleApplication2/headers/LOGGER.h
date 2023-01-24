@@ -6,6 +6,11 @@ namespace Skele_lib {
 	namespace SKGE {
 		class LOGGER {
 			CSTRING  m_name;
+			size_t VaLog(cCSTRING fmt, va_list args) {
+				size_t leng = 0;
+				leng += vprintf(fmt, args);
+				return leng;
+			}
 		public:
 			LOGGER(cCSTRING  name) {
 				m_name = (CSTRING)malloc(strlen(name)+1);
@@ -41,6 +46,13 @@ namespace Skele_lib {
 					pos += incval; 
 				}
 				return retval; 
+			}
+			size_t operator()(cCSTRING  fmt, ...) {
+				size_t leng = printf("[%s] ", m_name);
+				va_list va;
+				va_start(va, fmt); 
+				VaLog(fmt, va);
+				va_end(va);
 			}
 		};
 	}

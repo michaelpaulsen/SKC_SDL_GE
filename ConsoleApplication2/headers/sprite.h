@@ -25,12 +25,12 @@ namespace Skele_lib {
 				m_size  =  size;
 				m_scale = 1;
 			}
-			void DrawSprite( SDL_Renderer* renderer, int posx, int posy) {
+			void DrawSprite ( SDL_Renderer* renderer, int posx, int posy) {
 				Vector::Vec2d realSize = m_scale * m_size;
 				SDL_Rect destrect = { posx, posy, realSize.m_w,realSize.m_h };
 				SDL_RenderCopy(renderer, this->m_texture, p_UVMap, &destrect);
 			}
-			void SetUVMap(SDL_Rect uvm) {
+			void SetUVMap   (SDL_Rect uvm) {
 				if (!p_UVMap) {
 					p_UVMap = (SDL_Rect*)malloc(sizeof(SDL_Rect));
 					if (!p_UVMap)return;
@@ -40,25 +40,24 @@ namespace Skele_lib {
 				p_UVMap->w = uvm.w; 
 				p_UVMap->h = uvm.h; 
 			}
-			void ClearUVMap() {
+			void ClearUVMap () {
 				free(p_UVMap);
 			}
-			
-			void SetXYScale(double scale) {
+			void SetXYScale (double scale) {
 				m_scale.m_x = scale;
 				m_scale.m_y = scale;
 			}
-			void GetScale(double& xScale, double& yScale) {
+			void GetScale   (double& xScale, double& yScale) {
 				xScale = m_size.m_x;
 				yScale = m_size.m_y;
 			}
-			void SetXScale(double scale) {
+			void SetXScale  (double scale) {
 				m_scale.m_x = scale; 
 			}
-			void SetYScale(double scale) {
+			void SetYScale  (double scale) {
 				m_scale.m_y = scale; 
 			}
-			void ClearScale() {
+			void ClearScale () {
 				m_scale.m_x = 1;  
 				m_scale.m_y = 1;  
 			}

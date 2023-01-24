@@ -7,22 +7,22 @@ namespace Skele_lib {
 			 static size_t nutid;
 		public:
 
-			Counter() {
+			     Counter    () {
 				m_uid = nutid++;
 			}
-			void IncCount() {
+			void IncCount   () {
 				++m_count;
 			}
-			void setLeng(size_t nleng) {
+			void setLeng    (size_t nleng) {
 				m_leng = nleng;
 			}
-			void setMax(size_t nleng) {
+			void setMax     (size_t nleng) {
 				m_max = nleng;
 			}
-			bool IsActive() {
+			bool IsActive   () {
 				return m_count <= m_leng;
 			}
-			void operator()(World w, EventQue eq) {
+			void operator() (World w, EventQue eq) {
 				if (m_count < m_leng) {
 					eq.callEventByName("TimerActiveTrigger", NULL,  w, m_uid);
 				}

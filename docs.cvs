@@ -1,0 +1,110 @@
+Class,function name,notes 
+Counter,IncCount  ,increments the count then triggers the respective triggers
+Counter,IsActive  ,returns whether or not the counter is active 
+Counter,operator(),same as calling incCount 
+Counter,setLeng   ,sets the length 
+Counter,setMax    ,sets the reset point 
+Event_t,GetTid,returns the Tid of the event 
+Event_t,IsSDLEvent,returns whether or not the event is a SDL event 
+Event_t,operator==,The == operator 
+EventHandler,operator(),calls the eventHandler for the event 
+EventQue,callEventByName,calls the eventHandler for the event based off of its name 
+EventQue,callEventByTID,calls the eventHandler for the event based off of its TID 
+EventQue,registerEvent,"emplaces back a event there is overloads for each 
+Different constructor of the Event_t type"
+Level ,At     ,"if one number is passed in returns the yth column 
+If two are then it returns the value at that xy "
+Level ,GetSize,returns the size of the level 
+Level ,Set    ,"sets the tile at the passed in x, y"
+Logger,,- prints the name of the Logger in brackets then acts like printf
+Physics,AddForce                 ,adds a force to the object 
+Physics,ApplyForce               ,applies the Force of the object 
+Physics,ApplyForceAndSetPos      ,applies the Force of the object and sets the pos
+Physics,BounceHorizontal         ,bounces the passed in object horizontally 
+Physics,BounceVirtical           ,bounces the passed in object vertically  
+Physics,CaculateAndAddSpringForce,calculates and adds the spring force to the object 
+Physics,SetDragForce             ,sets the drag force of an obect 
+Physics,SetForce                 ,sets the force of a object 
+Player,ClearScale,sets the scale to 1 
+Player,ClearUVMap,clears the UV map 
+Player,DrawSprite,Draws the underlying sprite 
+Player,GetDrag,Get the Drag force of object
+Player,GetForce,get the force of the object
+Player,getPlayerRect,get the rect of underlying sprite 
+Player,GetPosition,gets the position of the player 
+Player,GetScale,get the scale of the underlying sprite  
+Player,SetUVMap,sets the UV map of the underlying sprite 
+Player,SetXScale,sets the scale on the x axis 
+Player,SetXYScale,sets the scale on both axis 
+Player,SetYScale,sets the scale on the y axis 
+Sprite,ClearScale,sets the scale to 1 
+Sprite,ClearUVMap,clears the UV map 
+Sprite,DrawSprite,draws the sprite 
+Sprite,GetScale  ,get the scale of the sprite 
+Sprite,SetUVMap  ,sets the UV map of the sprite
+Sprite,SetXScale ,sets the scale on the x axis 
+Sprite,SetXYScale,sets the scale on both axis 
+Sprite,SetYScale ,sets the scale on the y axis 
+Timer,Wait,"takes in the frame time and waits a given time amount of time 
+So that the total time is equal to a passed in frame time "
+Utils,readInt,reads an interger from a file (for bytes) 
+Utils,ReadNBytes,reads n bytes from a file 
+Vec2,AbsDist  ,returns the distance as an absolute value
+Vec2,AsOriginOfSDL_Rect,"returns an SDL_Rect that is {x,y,w, h} where w h are 0 if not passed in"
+Vec2,Dist     ,"returns the distance from 0,0 "
+Vec2,Fleng,returns the non-square rooted length of the vector
+Vec2,IsXLess,returns if the x comp is less than the passed in number 
+Vec2,IsXMore,returns if the x comp is more than the passed in number 
+Vec2,IsYLess,returns if the y comp is less than the passed in number 
+Vec2,IsYMore,returns if the y comp is more than the passed in number 
+Vec2,Norm,returns a normalized version of this vector 
+Vec2,Normalize,same as norm
+Vec2,operator-,The – operator 
+Vec2,operator-=,The -= operator
+Vec2,operator!=,The != operator 
+Vec2,operator*,The multiplucation operator 
+Vec2,operator*=,The *= operator 
+Vec2,operator/,The / operator 
+Vec2,operator/=,The /= operator 
+Vec2,operator+,The + operator 
+Vec2,operator+=,The += operator 
+Vec2,operator<,The < operator 
+Vec2,operator=,The = operator 
+Vec2,operator==,The == operator 
+Vec2,operator>,The > operator 
+Vec2,PosFromSDL_Rect ,takes in an sdlRect and make a Vector of the x and y components 
+Vec2,ToSDL_Rect,"returns a rect at {0,0,x,y}"
+Vec3d,,is a repersents a color 
+Window,ClearRenderer,clears the renderer 
+Window,ClearScreenToDrawColor,draws a rect the size of the screen that is the current draw color
+Window,DrawInventory,draws the inventory of the active player. 
+Window,GetActiveInvinory,returns the index of the last active inventory  
+Window,GetWindow,get the SDL_Window that this object represents 
+Window,GetWindowSize,returns the Vec2i that represents the size of the window 
+Window,IsInInvintory,returns whether or not the window is drawing an inventory
+Window,IsPaused,returns whether or not the window is paused
+Window,RenderDrawCircle,draws a circle 
+Window,RenderDrawLines,draws a line 
+Window,RenderDrawRect,draws a rectangle
+Window,RenderDrawTriangle,draws a triangle 
+Window,RenderFilledCircle,Fills a circle
+Window,RenderFillRect,Fills a rectangle
+Window,SetDrawColor,sets the pen color 
+Window,SetPuase,sets the pause state 
+Window,SetSize,gets the size of the window and set a vec2i to that size 
+Window,SetWindowTitle,sets the window’s title 
+Window,TakeScreenShot,saves the window’s suface to disk as a bitmap image 
+Window,ToggleInvintory,toggles whether or not you’re in the inventory 
+Window,TogglePause,toggles whether or not you’re paused
+Window,UpdateScreen,Updates the window surface with the current render context 
+Window,WindowSizeToSdlRect,"returns a rect at 0,0,screen width, screen height"
+World,AddPlayer                  ,adds a player to the world 
+World,ApplyForceToPlayers        ,applies forces to all of the players
+World,BouncePlayersOffWorldBounds,bounces the players off of the world border 
+World,DrawPlayers                ,draws all of the players 
+World,GetFrame                   ,gets the frame number
+World,GetFrameTime               ,gets the the max amount of time to render a frame 
+World,GetPlayerAt                ,gets the nth player 
+World,GetPlayerCount             ,gets the number of players 
+World,IncFrame                   ,incements the frame
+World,SetTargetFPS               ,sets the target fps 

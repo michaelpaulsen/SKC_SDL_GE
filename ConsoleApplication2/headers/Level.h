@@ -45,17 +45,16 @@ namespace Skele_lib {
 					}
 					
 				}
-				void Set(int x, int y, int val) {
+				void                   Set(int x, int y, int val) {
 					tileIds[y][x] = val;
 				}
-				const Vector::Vec2i GetSize() const{
+				const Vector::Vec2i    GetSize() const{
 					return levelSize;
 				}
-			
 				const std::vector<int> At(size_t y) const{
 					return tileIds[y]; 
 				}
-				const int At(size_t x, size_t y) const {
+				const int              At(size_t x, size_t y) const {
 					return tileIds[y][x]; 
 				}
 				const std::vector<int>& operator[](size_t y) const {

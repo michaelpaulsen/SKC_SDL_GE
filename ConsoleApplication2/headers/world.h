@@ -27,31 +27,31 @@ namespace Skele_lib {
 				m_players = 0;
 				l_players = (Player*)malloc(sizeof(Player)*MAX_PLAYERS); 
 			}
-			std::chrono::milliseconds GetFrameTime() {
+			std::chrono::milliseconds GetFrameTime                () {
 				return std::chrono::milliseconds(1000 / TFPS);
 			}
-			Player& GetPlayerAt(size_t index) {
+			Player&                   GetPlayerAt                 (size_t index) {
 				if (index > m_players) {
 					return  l_players[m_players];
 				}
 				return l_players[index];
 
 			}
-			FrameN_t GetFrame()        { return           m_frame; }
-			size_t GetPlayerCount()    { return         m_players; }
-			void AddPlayer(const char* path, SDL_Renderer* renderer, Vector::Vec2d _s, Vector::Vec2d _p, Vector::Vec2d _d) {
+			FrameN_t                  GetFrame                    ()        { return           m_frame; }
+			size_t                    GetPlayerCount              ()    { return         m_players; }
+			void                      AddPlayer                   (const char* path, SDL_Renderer* renderer, Vector::Vec2d _s, Vector::Vec2d _p, Vector::Vec2d _d) {
 				if (m_players != MAX_PLAYERS) {
 					l_players[m_players] = Player(path, renderer, _s, _p,_d);
 					m_players++;
 
 				}
 			}
-			void DrawPlayers(SDL_Renderer* r) {
+			void                      DrawPlayers                 (SDL_Renderer* r) {
 				for (size_t i = 0; i < m_players; i++){
 					l_players[i].DrawSprite(r);
 				}
 			}
-			void ApplyForceToPlayers() {
+			void                      ApplyForceToPlayers         () {
 				for (size_t i = 0; i < m_players; i++){
 					auto& player = l_players[i];
 					auto& force = player.GetForce();
@@ -60,7 +60,7 @@ namespace Skele_lib {
 					Skele_lib::SKGE::Physics::ApplyForceAndSetPos(pos, force, drag);
 				}
 			}
-			void BouncePlayersOffWorldBounds(int w, int h) {
+			void                      BouncePlayersOffWorldBounds (int w, int h) {
 				for (size_t i = 0; i < m_players; i++){
 					auto& player = l_players[i];
 					auto& force = player.GetForce();
@@ -73,10 +73,10 @@ namespace Skele_lib {
 					}
 				}
 			}
-			void IncFrame() {
+			void                      IncFrame                    () {
 				++m_frame;
 			}
-			void SetTargetFPS(FrameN_t targetFPS) {
+			void                      SetTargetFPS                (FrameN_t targetFPS) {
 				TFPS = targetFPS;
 			}
 		};
