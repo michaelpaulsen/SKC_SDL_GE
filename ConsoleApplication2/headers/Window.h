@@ -58,6 +58,11 @@ namespace Skele_lib {
 				lastColor.b = b;
 				lastAlpha   = a;
 			}
+            void              SetSize() {     
+                Vector::Vec2i wind = { 0,0 }; 
+                SDL_GetWindowSize(window, &wind.m_w, &wind.m_h);
+                windowSize = wind;
+            }
             void              SetSize(Vector::Vec2i &wind) {     
                 SDL_GetWindowSize(window, &wind.m_w, &wind.m_h);
                 windowSize = { wind.m_w, wind.m_h };

@@ -92,9 +92,9 @@ int main(int argc, char* args[]) {
 
 	}
 	});
-	eQue.registerEvent("SDL_RENDER_TARGETS_RESET", { SDL_RENDER_TARGETS_RESET, true  }, [mil, mwl, mdl, mel, &window, &windh,   &windw, &minimized](const SDL_Event* e, Skele_lib::SKGE::World& world, size_t pid) {
-		SDL_GetWindowSize(window.window, &windw, &windh); 
-		window.windowSize = { windw, windh };
+	eQue.registerEvent("SDL_RENDER_TARGETS_RESET", { SDL_RENDER_TARGETS_RESET, true }, [mil, mwl, mdl, mel, &window, &windh, &windw, &minimized](const SDL_Event* e, Skele_lib::SKGE::World& world, size_t pid) {
+
+		window.SetSize();
 		auto type = e->window.event; 
 		if (type == SDL_WINDOWEVENT_MINIMIZED) minimized = true; 
 		if (type == SDL_WINDOWEVENT_RESTORED || type == SDL_WINDOWEVENT_MAXIMIZED) minimized = false; 
