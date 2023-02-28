@@ -8,10 +8,10 @@
 #define coutf  std::cout << std::format
 #endif
 #ifndef CSTRING  
-#define CSTRING  char* 
+#define CSTRING std::string
 #endif // !CSTRING  
 #ifndef cCSTRING  
-#define cCSTRING  const char* 
+#define cCSTRING  const std::string 
 #endif // !CSTRING  
 #ifndef CBuffer  
 #define CBuffer(name, size) char name[size] 

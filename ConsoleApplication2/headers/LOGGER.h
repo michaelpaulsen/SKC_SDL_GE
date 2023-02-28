@@ -1,58 +1,46 @@
 #pragma once
 #include <cstdarg> 
+#include <iostream>
+#include <fstream>
+#include <format>
 
 #include "Defines.h"
 namespace Skele_lib {
 	namespace SKGE {
 		class LOGGER {
 			CSTRING  m_name;
-			size_t VaLog(cCSTRING fmt, va_list args) {
-				size_t leng = 0;
-				leng += vprintf(fmt, args);
-				return leng;
-			}
+			//std::ostream out;
+			//std::streambuf* buf;
+			std::streambuf* buf;
+			std::ofstream of;
+			std::ostream *out; 
 		public:
 			LOGGER(cCSTRING  name) {
-				m_name = (CSTRING)malloc(strlen(name)+1);
-				size_t i = 0; 
-				while (name[i]) {
-					m_name[i] = name[i]; 
-					++i;
-				}
-				m_name[i] = 0; 
+				m_name = name; 
+				buf = std::cout.rdbuf();
+				out = new std::ostream(buf);
 			}
-			size_t Log(cCSTRING  fmt, ...) const {
-				size_t leng = 0; 
-				leng += printf("[%s] ", m_name); 
-				va_list args;
-				va_start(args, fmt);
-				leng += vprintf(fmt, args); 
-				va_end(args);
-				return leng;
+			LOGGER(cCSTRING  name, std::string filename) {
+				m_name = name; 
+				buf = std::cout.rdbuf();
+				out = new std::ostream(buf);
 			}
-			size_t Print(cCSTRING  fmt, ...) {
-				size_t leng = 0;
-				va_list args;
-				va_start(args, fmt);
-				leng += vprintf(fmt, args);
-				va_end(args);
-				return leng;
+			LOGGER(LOGGER&) = delete; 
+			LOGGER(LOGGER&&) = delete; 
+			void Log(cCSTRING  message ) const {
+				std::cout << std::format("[{}-LOG]{}", m_name, message);
 			}
-			size_t PrintTo(const int endpos, const int startpos = 0) {
-				size_t pos = startpos, retval = 0; 
-				while (pos < endpos) {
-					auto incval = printf(" "); 
-					retval += incval; 
-					pos += incval; 
-				}
-				return retval; 
+			void Print(cCSTRING  message) {
+				std::cout << std::format("[{}]{}", m_name, message);
 			}
-			size_t operator()(cCSTRING  fmt, ...) {
-				size_t leng = printf("[%s] ", m_name);
-				va_list va;
-				va_start(va, fmt); 
-				VaLog(fmt, va);
-				va_end(va);
+			void Warn(cCSTRING  message) {
+				std::cout << std::format("[{}-Warn]{}", m_name, message);
+			}
+			void Error(cCSTRING  message) {
+				std::cout << std::format("[{}-Error]{}", m_name, message);
+			}
+			void operator()(cCSTRING message ) {
+				Print(message); 
 			}
 		};
 	}
