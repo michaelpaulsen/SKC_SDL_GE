@@ -17,7 +17,7 @@ namespace Skele_lib {
 			FrameN_t m_frame;
 			FrameN_t TFPS;
 			size_t m_players;
-			Player* l_players;
+			GameObject::Player* l_players;
 		public:
 			long double dElapsedTime;
 			World(int tfs) {
@@ -25,12 +25,12 @@ namespace Skele_lib {
 				m_frame = 0;
 				dElapsedTime = 0;
 				m_players = 0;
-				l_players = (Player*)malloc(sizeof(Player)*MAX_PLAYERS); 
+				l_players = (GameObject::Player*)malloc(sizeof(GameObject::Player)*MAX_PLAYERS);
 			}
 			std::chrono::milliseconds GetFrameTime                () {
 				return std::chrono::milliseconds(1000 / TFPS);
 			}
-			Player&                   GetPlayerAt                 (size_t index) {
+			GameObject::Player&                   GetPlayerAt                 (size_t index) {
 				if (index > m_players) {
 					return  l_players[m_players];
 				}
@@ -39,9 +39,9 @@ namespace Skele_lib {
 			}
 			FrameN_t                  GetFrame                    ()        { return           m_frame; }
 			size_t                    GetPlayerCount              ()    { return         m_players; }
-			void                      AddPlayer                   (const char* path, SDL_Renderer* renderer, Vector::Vec2d _s, Vector::Vec2d _p, Vector::Vec2d _d) {
+			void                      AddPlayer                   (const char* path, SDL_Renderer* renderer, Vector::Vec2d _s, Vector::Vec2i _p, Vector::Vec2d _d) {
 				if (m_players != MAX_PLAYERS) {
-					l_players[m_players] = Player(path, renderer, _s, _p,_d);
+					l_players[m_players] = GameObject::Player(path, renderer, _s, _p,_d);
 					m_players++;
 
 				}
